@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- Quoro docs. -->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07080c">
+<title data-slot="meta.docs.title">Docs · Quoro</title>
+<meta name="description" content="How Quoro scores Robinhood Chain tokens, how buying from 17 chains works, what you pay and what the Data score does not mean." data-slot="meta.docs.description">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://127.0.0.1:8795/docs">
+<meta property="og:title" content="Docs · Quoro" data-slot="meta.docs.title">
+<meta property="og:description" content="How Quoro scores Robinhood Chain tokens, how buying from 17 chains works, what you pay and what the Data score does not mean." data-slot="meta.docs.description">
+<meta property="og:image" content="http://127.0.0.1:8795/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A Robinhood Chain token checked by Quoro: Data score and a one-line AI explanation." data-slot="og.image.alt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@quoroexchange" data-slot="meta.twitter.site">
+<meta name="twitter:creator" content="@quoroexchange" data-slot="meta.twitter.creator">
+<meta name="twitter:image" content="http://127.0.0.1:8795/assets/og.png">
+<link rel="icon" href="/assets/brand/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/c.css">
+</head>
+<body class="is-app docs">
+<header class="topnav" id="topnav">
+  <div class="in">
+    <div class="navl">
+      <a class="brand" href="/" aria-label="Quoro" data-slot-aria="logo.alt"><svg class="bm" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M27.27 23.02 A10 10 0 0 1 23.02 27.27" fill="none" stroke="#ccff00" stroke-width="7" stroke-linecap="butt"/><path d="M19.15 24.10 A10 10 0 0 1 13.87 24.94" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M13.01 24.80 A10 10 0 0 1 8.24 22.37" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M7.63 21.76 A10 10 0 0 1 5.20 16.99" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M5.06 16.13 A10 10 0 0 1 5.90 10.85" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M6.30 10.08 A10 10 0 0 1 10.08 6.30" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M10.85 5.90 A10 10 0 0 1 16.13 5.06" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M16.99 5.20 A10 10 0 0 1 21.76 7.63" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M22.37 8.24 A10 10 0 0 1 24.80 13.01" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M24.94 13.87 A10 10 0 0 1 24.10 19.15" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/></svg><svg class="wm" width="63" height="21" viewBox="0 0 102 34" fill="none" stroke-width="4" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="16" r="7" stroke="#f5f5f5"/><path d="M16 9 V31" stroke="#f5f5f5"/><path d="M24 9 V16 a7 7 0 0 0 14 0 V9 M38 9 V23" stroke="#f5f5f5"/><circle cx="52" cy="16" r="7" stroke="#f5f5f5"/><path d="M66 23 V9 M66 16 a7 7 0 0 1 7 -7 h2" stroke="#f5f5f5"/><circle cx="88" cy="16" r="7" stroke="#f5f5f5"/></svg></a>
+      <nav class="links" aria-label="Main"><a href="/app" data-slot="nav.swap">Buy</a><a href="/explore" data-slot="nav.explore">Explore</a><a href="/docs#score" data-slot="nav.score">Data score</a><a href="/portfolio" data-slot="nav.portfolio" data-when="in" hidden>Portfolio</a></nav>
+    </div>
+    <form class="nsearch" action="/explore" method="get" role="search"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input name="ca" aria-label="Search tokens or paste an address" placeholder="Search tokens or paste an address" data-slot="nav.search" autocomplete="off" spellcheck="false"><kbd aria-hidden="true">/</kbd></form>
+    <div class="navr"><button class="mbtn" type="button" id="mBtn" aria-label="Menu" data-slot-aria="nav.menu" aria-expanded="false" aria-controls="mSheet"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button><button class="btn btn-lime" type="button" id="navSignIn" data-slot="nav.signin">Connect wallet</button><button class="btn acct" type="button" id="navAcct" hidden></button></div>
+  </div>
+  <nav class="msheet" id="mSheet" aria-label="Menu" hidden><a href="/app" data-slot="nav.swap">Buy</a><a href="/explore" data-slot="nav.explore">Explore</a><a href="/docs#score" data-slot="nav.score">Data score</a><a href="/docs" data-slot="footer.links.docs">Docs</a><a href="/portfolio" data-slot="nav.portfolio" data-when="in" hidden>Portfolio</a></nav>
+</header>
+<main class="wrap dwrap">
+  <div class="dtoc" id="dtoc">
+    <button class="dsum" type="button" id="dsum" aria-expanded="false" aria-controls="dtocNav"><span data-slot="docs.toc">On this page</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <b data-slot="docs.toc">On this page</b>
+    <nav id="dtocNav" aria-label="On this page"><a href="#about" data-slot="docs.about.title">What Quoro is</a><a href="#score" data-slot="docs.score.title">Data score</a><a href="#buying" data-slot="docs.buy.title">How buying works</a><a href="#selling" data-slot="docs.sell.title">Selling</a><a href="#fees" data-slot="docs.fees.title">Fees</a><a href="#chain" data-slot="docs.chain.title">Robinhood Chain</a><a href="#wallet" data-slot="docs.wallet.title">Wallets</a><a href="#disclaimers" data-slot="docs.legal.title">Disclaimers</a></nav>
+  </div>
+  <article class="dmain">
+    <h1 data-slot="docs.title">Docs</h1>
+    <p class="dlead" data-slot="docs.sub">How Quoro scores a token, how a buy works and what you pay.</p>
+
+    <section class="dsec" id="about">
+      <h2 data-slot="docs.about.title">What Quoro is</h2>
+      <p data-slot="docs.about.p1">Quoro is the first AI DEX on Robinhood Chain. Paste any token to see its facts. Every launch gets a Data score from 1 to 10 that AI explains in plain words, and you buy with ETH, BNB or POL from 17 chains.</p><p data-slot="docs.about.ai">The AI explains a score from the facts on the page. It doesn’t trade for you and doesn’t tell you what to buy.</p><p data-slot="docs.about.p2">Then buy it from any of 17 chains with that chain’s own coin: ETH, BNB on BNB Chain or POL on Polygon. One signature covers the whole buy, and the token arrives in your own wallet.</p><p data-slot="docs.about.p3">Quoro never holds your money. You sign every transaction yourself, and checking a token needs no wallet.</p><p data-slot="docs.about.p4">You can sell from the same form and receive ETH, BNB or POL on any of the 17 chains.</p>
+    </section>
+
+    <section class="dsec" id="score">
+      <h2 data-slot="docs.score.title">Data score</h2>
+      <p data-slot="docs.score.p1">The Data score is a number from 1 to 10 computed from public on-chain data. It describes how a launch was set up and how it trades right now.</p>
+      <div class="dscale"><div class="cells10" aria-hidden="true"><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i></i></div><div class="nums" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div></div>
+      <p class="dcallout" data-slot="docs.score.not">It is not a price call, a rating of the team or a promise of anything. A token with a high score can still lose value. Nothing here is financial advice.</p>
+      <h3 data-slot="docs.score.formula.title">How it’s counted</h3>
+      <p data-slot="docs.score.formula.p">Two parts, each out of 10. The launch part carries 60% of the weight, the market part 40%. The result is rounded to a whole number, then any cap that applies limits it.</p>
+      <div class="dtiles"><div class="dtile dotted acc"><span class="k" data-slot="hero.viz.launch">Launch</span><span class="v">60%</span></div><div class="dtile dotted"><span class="k" data-slot="hero.viz.market">Market</span><span class="v">40%</span></div></div>
+      <div class="formula-big"><span data-slot="docs.score.formula">Data score = 0.6 × Launch + 0.4 × Market</span><span class="fex" data-slot="docs.score.formula.example">Example: 0.6 × 10 + 0.4 × 7 = 8.8, rounds to 9.</span></div>
+      <h3 data-slot="docs.score.launch.title">Launch, out of 10</h3>
+      <p data-slot="docs.score.launch.p">Starts at 10. Each finding below takes points off, and two can add a point back. The launch part never drops below zero.</p>
+      <div class="dtable"><div class="dtr dtr2 hd"><span data-slot="docs.score.launch.col.finding">Finding</span><span></span><span class="r" data-slot="docs.score.launch.col.points">Points</span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.bundle">Wallets were exempt from the opening tax</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−3</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.snipers_heavy">Snipers took over 15% of supply in the first blocks</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−2</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.snipers">Snipers took over 5% of supply in the first blocks</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.serial_dev">The deployer has 5 or more earlier launches and none moved to a pool</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−2</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.mill">The deployer launches at volume and almost none of it moves to a pool</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−2</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.farm">The same launch pattern appeared from other wallets within half an hour</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−2</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.dev_sold_here">The deployer sold on this token’s curve</span><span><span class="cappill" data-slot="docs.score.launch.serious">Serious</span></span><span class="r"><span class="dpt ">−2</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.dev_dumps">The deployer sold on earlier launches</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.dev_heavy">The deployer bought over 12% of supply</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.tax">Creator tax above 3%</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.fees_elsewhere">Creator fees go to a third party, not the deployer</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.no_socials">No socials declared at launch</span><span></span><span class="r"><span class="dpt ">−1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.burned">The deployer’s supply is burned</span><span></span><span class="r"><span class="dpt plus">+1</span></span></div><div class="dtr dtr2"><span data-slot="docs.score.launch.proven_dev">The deployer had a launch move to a pool and never sold</span><span></span><span class="r"><span class="dpt plus">+1</span></span></div></div>
+      <p class="dnote" data-slot="docs.score.launch.ceiling">Any deduction keeps the launch part at 9 or below. A serious one, marked in the table, keeps it at 8 or below, whatever the bonuses.</p>
+      <h3 data-slot="docs.score.market.title">Market, out of 10</h3>
+      <p data-slot="docs.score.market.p">Four facts about trading right now.</p>
+      <div class="dtable"><div class="dtr dtr2 hd"><span data-slot="docs.score.market.col.fact">Fact</span><span></span><span class="r" data-slot="docs.score.market.col.points">Points</span></div><div class="dtr dtr2" data-slot="docs.score.market.buyers"><span><b class="mfact">Buyers</b></span><span class="mrule">under 10 → 0 · 10 to 29 → 1 · 30 to 99 → 2 · 100 to 249 → 3 · 250 or more → 4</span><span class="r"><span class="pts"><i class=on></i><i class=on></i><i class=on></i><i class=on></i></span> <span class="sr" data-slot="score.cap.max">max 4</span></span></div><div class="dtr dtr2" data-slot="docs.score.market.depth"><span><b class="mfact">Curve filled</b></span><span class="mrule">under 5% → 0 · 5 to 19% → 1 · 20 to 49% → 2 · 50% or more → 3 · moved to a pool → 3</span><span class="r"><span class="pts"><i class=on></i><i class=on></i><i class=on></i></span> <span class="sr" data-slot="score.cap.max">max 3</span></span></div><div class="dtr dtr2" data-slot="docs.score.market.liveness"><span><b class="mfact">Last trade</b></span><span class="mrule">under 10 minutes → 2 · under an hour → 1 · older → 0 · moved to a pool → 1</span><span class="r"><span class="pts"><i class=on></i><i class=on></i></span> <span class="sr" data-slot="score.cap.max">max 2</span></span></div><div class="dtr dtr2" data-slot="docs.score.market.smart"><span><b class="mfact">Smart wallets</b></span><span class="mrule">3 or more → 1</span><span class="r"><span class="pts"><i class=on></i></span> <span class="sr" data-slot="score.cap.max">max 1</span></span></div></div>
+      <p class="dnote" data-slot="docs.score.market.smart.def">A smart wallet has bought into 3 or more launches, and at least a quarter of them later moved to a pool.</p>
+      <h3 data-slot="docs.score.caps.title">Caps</h3>
+      <p data-slot="docs.score.caps.p">A cap limits the final score, however good the rest looks. When several apply, the lowest wins. The token card names every cap that fired.</p>
+      <div class="dtable"><div class="dtr dtr3" data-slot="docs.score.cap.flag"><span>A serious launch finding</span><span class="r"><span class="cappill ">max 5</span></span></div><div class="dtr dtr3" data-slot="docs.score.cap.dev10"><span>The deployer holds over 10% now</span><span class="r"><span class="cappill ">max 5</span></span></div><div class="dtr dtr3" data-slot="docs.score.cap.dev25"><span>The deployer holds over 25% now</span><span class="r"><span class="cappill ">max 3</span></span></div><div class="dtr dtr3 dtrnote"><span class="dcapnote" data-slot="docs.score.cap.dev.note">Based on what the deployer holds now. If that can’t be read, the card shows a dash.</span></div><div class="dtr dtr3" data-slot="docs.score.cap.idle"><span>No trades for 24 hours on the curve</span><span class="r"><span class="cappill ">max 4</span></span></div><div class="dtr dtr3" data-slot="docs.score.cap.age"><span>Under 10 minutes old, data still coming in</span><span class="r"><span class="cappill mid">max 7</span></span></div><div class="dtr dtr3" data-slot="docs.score.cap.partial"><span>Part of the data could not be read</span><span class="r"><span class="cappill low">max 8, marked partial</span></span></div></div>
+      <p class="dnote" data-slot="docs.score.ten">A 10 means nothing was found in the launch and the market is busy.</p>
+      <h3 data-slot="docs.score.noscore.title">Tokens without a score</h3>
+      <p data-slot="docs.score.noscore.p">The Data score covers launches. Stock tokens have no launch to score, so their card shows price and facts without a score. Other tokens show their supply, with no score.</p>
+    </section>
+
+    <section class="dsec" id="buying">
+      <h2 data-slot="docs.buy.title">How buying works</h2>
+      <p data-slot="docs.buy.p1">Pay with the native coin of the chain your funds are on: ETH on most chains, BNB on BNB Chain, POL on Polygon. ETH already on Robinhood Chain buys the token right there. From any other chain, your payment comes over and buys the token in the same signature.</p>
+      <h3 data-slot="docs.buy.chains.title">Supported chains</h3><div class="dchains" aria-label="Robinhood Chain, Ethereum, Base, Arbitrum, Optimism, BNB Chain, Polygon, Unichain, Linea, ZKsync, Scroll, Blast, Ink, World Chain, Soneium, Abstract, Mode" data-slot="docs.buy.chains"><span><img src="/assets/chains/rh.svg" alt="" width="32" height="32">Robinhood Chain</span><span><img src="/assets/chains/ethereum.svg" alt="" width="32" height="32">Ethereum</span><span><img src="/assets/chains/base.svg" alt="" width="32" height="32">Base</span><span><img src="/assets/chains/arbitrum.svg" alt="" width="32" height="32">Arbitrum</span><span><img src="/assets/chains/optimism.svg" alt="" width="32" height="32">Optimism</span><span><img src="/assets/chains/bnb.svg" alt="" width="32" height="32">BNB Chain</span><span><img src="/assets/chains/polygon.svg" alt="" width="32" height="32">Polygon</span><span><img src="/assets/chains/unichain.svg" alt="" width="32" height="32">Unichain</span><span><img src="/assets/chains/linea.svg" alt="" width="32" height="32">Linea</span><span><img src="/assets/chains/zksync.svg" alt="" width="32" height="32">ZKsync</span><span><img src="/assets/chains/scroll.svg" alt="" width="32" height="32">Scroll</span><span><img src="/assets/chains/blast.svg" alt="" width="32" height="32">Blast</span><span><img src="/assets/chains/ink.svg" alt="" width="32" height="32">Ink</span><span><img src="/assets/chains/worldchain.svg" alt="" width="32" height="32">World Chain</span><span><img src="/assets/chains/soneium.svg" alt="" width="32" height="32">Soneium</span><span><img src="/assets/chains/abstract.svg" alt="" width="32" height="32">Abstract</span><span><img src="/assets/chains/mode.svg" alt="" width="32" height="32">Mode</span></div><p data-slot="docs.buy.p2">Quoro finds the route for you. If no route exists yet, for a very new token or a very small amount, you’ll see it before signing.</p>
+      <h3 data-slot="docs.buy.before.title">Before you sign</h3><p data-slot="docs.buy.before.p">The review shows the minimum you will receive, the network fee, the bridge fee if you pay from another chain, the route fee, the creator tax if the token has one, and the price impact. If the quote changes before you sign, you see the new numbers and confirm again.</p>
+      <h3 data-slot="docs.buy.slippage.title">Slippage</h3><p data-slot="docs.buy.slippage.p">Slippage is how far the price may move before your buy lands. The default is 3%, and you can change it in settings. If the price moves further, nothing is bought.</p>
+      <h3 data-slot="docs.buy.after.title">After you sign</h3><p data-slot="docs.buy.after.p1">On Robinhood Chain a buy arrives in about a second, from most other chains in seconds, and from Ethereum usually in under a minute. If a confirmation is slow, the buy shows as still on its way, with a link to the explorer. Don’t buy again until it arrives.</p><p data-slot="docs.buy.after.p2">If a cross-chain buy can’t be completed, your payment is returned.</p><p class="dnote" data-slot="docs.buy.history">Your activity list is kept only in this browser. Clearing site data removes the list, not your tokens.</p>
+    </section>
+
+        <section class="dsec" id="selling">
+      <h2 data-slot="docs.sell.title">Selling</h2>
+      <p data-slot="docs.sell.p1">Flip the form with the arrow between the fields to sell a token you hold on Robinhood Chain. You receive ETH, BNB or POL on any of the 17 chains, on Robinhood Chain by default.</p><p data-slot="docs.sell.p2">When a sale needs a permission, your wallet first asks you to allow exactly the amount you sell, then to sign the sale. That sale takes two signatures. Without a permission step, a sale takes one.</p><p data-slot="docs.sell.p3">The review shows what you sell, what you will receive, the minimum received, the fees and how many signatures it takes. Creator tax applies to sales too, on tokens that have one.</p><p data-slot="docs.sell.p4">If a sale to another chain can’t be completed, your funds are returned to your wallet on Robinhood Chain.</p>
+    </section>
+    <section class="dsec" id="fees">
+      <h2 data-slot="docs.fees.title">Fees</h2>
+      <p data-slot="docs.fees.p">Quoro charges no fee of its own. What you pay depends on the token and the chain you pay from, and every amount is shown before you sign.</p>
+      <div class="droute"><div class="lrow fee" data-slot="docs.fees.network"><span class="fk">Network fee</span><span class="fv">on the chain you pay from</span></div><div class="lrow fee" data-slot="docs.fees.bridge"><span class="fk">Bridge fee</span><span class="fv">only when you pay from another chain</span></div><div class="lrow fee" data-slot="docs.fees.route"><span class="fk">Route fee</span><span class="fv">up to 0.25%, on some routes</span></div><div class="lrow fee" data-slot="docs.fees.tax"><span class="fk">Creator tax</span><span class="fv">set by the token’s creator, on buys and sales of some tokens</span></div></div>
+      <p class="dnote" data-slot="docs.fees.impact">Price impact is not a fee and doesn’t include the fees above. It is how much your own buy moves the price, and it grows with the size of the buy.</p>
+    </section>
+
+    <section class="dsec" id="chain">
+      <h2 data-slot="docs.chain.title">Robinhood Chain</h2>
+      <figure class="dquote"><blockquote data-slot="docs.chain.quote">A permissionless, AI-native Layer 2 built for financial services and real-world assets, purpose-built for AI agents.</blockquote><figcaption><a href="https://robinhood.com/us/en/crypto/chain/" target="_blank" rel="noopener" data-slot="docs.chain.quote.source">Robinhood Chain, official page ↗</a></figcaption></figure>
+      <p data-slot="docs.chain.infra">Runs on Arbitrum infrastructure · Blocks every 100 ms</p>
+      <div class="dfacts">
+        <div class="dtile dotted"><span class="k" data-slot="docs.chain.id">Chain ID</span><span class="v">4663</span></div>
+        <div class="dtile dotted"><span class="k" data-slot="docs.chain.native">Gas token</span><span class="v"><img src="/assets/tok-branded-ETH.svg" alt="" width="44" height="44">ETH</span></div>
+        <a class="dtile dotted dlink" href="https://robinhoodchain.blockscout.com" target="_blank" rel="noopener"><span class="k" data-slot="docs.chain.explorer">Explorer</span><span class="v sm">robinhoodchain.blockscout.com ↗</span></a>
+      </div>
+      <p class="dnote" data-slot="docs.chain.independent">Quoro is an independent app built on Robinhood Chain.</p>
+    </section>
+
+    <section class="dsec" id="wallet">
+      <h2 data-slot="docs.wallet.title">Wallets</h2>
+      <p data-slot="docs.wallet.p1">Checking a token needs no wallet. You connect one only to buy or sell.</p><p data-slot="docs.wallet.p2">Connect the wallet you already use. Quoro doesn’t create wallets and never holds your money: you sign every transaction, and tokens arrive in your own wallet.</p><p data-slot="docs.wallet.p3">New tokens often don’t show in a wallet until you add them. After a buy, Quoro offers a button to add the token.</p>
+    </section>
+
+    <p class="dfollow"><a href="https://x.com/quoroexchange" target="_blank" rel="noopener"><svg class="xmark" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77zm-1.08 16.18h1.7L7.4 4.73H5.58z"/></svg><span data-slot="docs.follow">Updates and new features: @quoroexchange on X.</span></a></p>
+    <section class="dsec" id="disclaimers">
+      <h2 data-slot="docs.legal.title">Disclaimers</h2>
+      <p data-slot="docs.legal.advice">The Data score and the AI explanation are readings of public on-chain data at the time shown. They are not advice and do not predict prices.</p><p data-slot="docs.legal.risk">New tokens are risky and can lose all of their value. Buy only what you can afford to lose.</p><p data-slot="docs.legal.custody">A signed transaction can’t be reversed, by you or by Quoro. Check the review before you sign.</p><p data-slot="docs.legal.stocks">Stock token availability depends on where you live. The note at the bottom of this page lists the restrictions.</p>
+    </section>
+  </article>
+</main>
+<footer class="appfoot">
+  <div class="wrap">
+    <nav class="flinks" aria-label="Footer"><a href="/app" data-slot="footer.links.app">Open Quoro</a><a href="/explore" data-slot="footer.links.explore">Explore</a><a href="/docs" data-slot="footer.links.docs">Docs</a><a href="/docs#score" data-slot="footer.links.how">How it’s counted</a><a href="https://x.com/quoroexchange" target="_blank" rel="noopener" class="xlink"><svg class="xmark" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77zm-1.08 16.18h1.7L7.4 4.73H5.58z"/></svg><span data-slot="footer.links.x">X · @quoroexchange</span></a></nav>
+    <p class="fchain"><span class="dot"></span><span data-slot="footer.chain">Robinhood Chain · block <span data-pulse="block">—</span></span></p>
+    <div class="disc">
+      <p data-slot="footer.legal">The Data score is computed from public on-chain data at the time shown and does not predict prices. Nothing here is financial advice. Quoro does not hold funds, and you sign every transaction yourself.</p>
+      <p data-slot="footer.stocks">Stock tokens are not available to persons in the United States and are restricted in Canada, the United Kingdom, Switzerland and other countries. Check the rules where you live before you buy.</p>
+      <p data-slot="footer.copy">© 2026 Quoro</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/boot.js"></script>
+<script>if(window.QUORO_MOCK)document.write('<script src="/js/mock.js"><\/script>')</script>
+<script src="/js/api.js"></script>
+<script src="/js/wallet.js"></script>
+<script src="/js/ui.js"></script>
+<script src="/js/shell.js"></script>
+<script src="/js/docs.js"></script>
+</body>
+</html>

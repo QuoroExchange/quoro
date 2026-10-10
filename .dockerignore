@@ -1,0 +1,8 @@
+.env
+server/.env
+server/data
+privy
+research
+tweets
+x
+**/__pycache__

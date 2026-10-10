@@ -1,0 +1,13 @@
+# secrets and local state
+.env
+*.env
+!server/.env.example
+server/data/
+data/
+# build inputs that are installed, not committed
+node_modules/
+privy/node_modules
+# python / os noise
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,463 @@
+/* Quoro visual layer: glass and depth. One glass slab per screen (swap + token) and glass on floating layers; no blur on
+   scrolling lists; lime only as points (the mark's tail, AI label, live dot, focus, primary action). Fonts: Manrope + DM Mono. */
+:root{
+  --bg:#07080c;--s1:#0e1017;--s2:#151821;--s3:#1f232e;
+  --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.06);
+  --t1:#eef0f5;--t2:#8d93a3;--t3:#575d6c;
+  --lime:#ccff00;--on-lime:#0a0b10;--lime-soft:rgba(204,255,0,.08);
+  --glass:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.02));
+  --glass-b:rgba(255,255,255,.12);--glass-blur:blur(24px) saturate(1.2);
+  --panel:rgba(14,16,23,.72);
+  --cta:linear-gradient(180deg,#f4f6fa,#d6dae4);
+}
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(1100px 640px at 50% 112%,rgba(204,255,0,.075),transparent 62%),radial-gradient(900px 620px at 85% -8%,rgba(92,112,168,.20),transparent 62%),radial-gradient(700px 520px at 5% 30%,rgba(60,74,120,.12),transparent 60%),linear-gradient(180deg,#0b0d14,#06070a 72%)}
+::selection{background:var(--lime);color:var(--on-lime)}.swapc .appgrid,.sheet,.wpanel,.spanel,.slipbox,.pnetlist,.msheet{background:var(--glass),var(--panel);border:1px solid var(--glass-b);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 40px 100px -40px rgba(0,0,0,.85)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .swapc .appgrid,.sheet,.wpanel,.spanel,.slipbox,.msheet{-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+}
+@media (max-width:760px){.swapc .appgrid{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--glass),rgba(14,16,23,.9)}}
+@media (prefers-reduced-transparency:reduce){.swapc .appgrid,.sheet,.wpanel,.spanel,.slipbox,.pnetlist,.msheet,.topnav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--s1)!important}
+}
+
+/* buttons */
+.btn{font-weight:600;letter-spacing:-.005em}
+.btn-lime{background:var(--cta);color:var(--on-lime);box-shadow:0 10px 30px -12px rgba(204,255,0,.35),inset 0 1px 0 #fff}
+.btn-lime:hover{filter:brightness(1.04)}
+.btn-ghost{background:rgba(255,255,255,.06);border-color:var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+/* nav */
+.topnav{background:rgba(7,8,12,.55);border-bottom-color:transparent}
+.topnav.scrolled{border-bottom-color:var(--line2)}
+.links a{font-weight:500;font-size:16px}
+.nsearch{background:rgba(255,255,255,.04);border-color:var(--line)}
+.nsearch:focus-within{background:rgba(7,8,12,.9)}
+.navr .btn-lime{background:rgba(255,255,255,.1);color:var(--t1);border:1px solid rgba(255,255,255,.18);box-shadow:none}
+.navr .btn-lime:hover{background:rgba(255,255,255,.16);filter:none}
+.acct{background:rgba(255,255,255,.06);border:1px solid var(--line)}
+
+/* ============ swap component = one glass slab (form | token) ============ */
+.swapc .appgrid{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:0;border-radius:32px;overflow:visible;position:relative;isolation:isolate}
+.swapc .appgrid::before{content:"";position:absolute;right:8%;top:18%;width:520px;height:520px;max-width:60%;background:radial-gradient(circle,rgba(204,255,0,.10),transparent 62%);pointer-events:none;z-index:-1}
+.swapc .swap{padding:24px 26px 26px;border-right:1px solid var(--line2);min-width:0}
+.swapc .tpanel{background:transparent;border:0;border-radius:0 32px 32px 0;overflow:hidden;min-width:0}
+.swhead{height:40px;padding:0 0 10px}
+.tabs button.on{background:rgba(255,255,255,.08)}
+.gear:hover,.gear[aria-expanded="true"]{background:rgba(255,255,255,.08)}
+.field{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.06);border-radius:22px;padding:18px 20px}
+.f-pay{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.08)}
+.field:focus-within{border-color:rgba(255,255,255,.16)}
+.flabel{font-size:14px;font-weight:500;letter-spacing:.01em}
+.amt{font:300 46px/1.15 var(--sans);letter-spacing:-.04em}
+.amt.out{font-weight:300}
+input.amt::placeholder{color:var(--t3)}
+.tokpill{background:rgba(255,255,255,.07);border-color:var(--line);font-weight:600;font-size:17px}
+button.tokpill:hover{background:rgba(255,255,255,.11)}
+.cb,.tl .cb{border-color:#1a1d26}
+.flip{background:rgba(20,22,29,.95);border:1px solid rgba(255,255,255,.16);border-radius:50%;width:44px;height:44px;margin:-14px auto;box-shadow:0 0 0 4px rgba(7,8,12,.6)}
+button.flip:hover{background:#1d212b}
+.capick{background:rgba(255,255,255,.04);border-color:var(--line)}
+.pickbtn.btn-lime{background:rgba(255,255,255,.08);color:var(--t1);border:1px solid rgba(255,255,255,.16);box-shadow:none}
+.pickbtn.btn-lime .chev,.pickbtn.btn-lime svg{color:var(--t2)}
+.pcts button{border-color:var(--line);background:rgba(255,255,255,.03)}
+.pcts button[data-pct="100"]{color:var(--t1);border-color:rgba(204,255,0,.35)}
+.btn-wide{height:62px;border-radius:20px;font-size:17px;margin-top:10px}
+#mainBtn:disabled{background:rgba(255,255,255,.05);color:var(--t2);box-shadow:none}
+#mainBtn[data-act="hero.card.cta"],#mainBtn[data-act="app.signin"]{background:rgba(255,255,255,.07);color:var(--t1);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+#mainBtn[data-act="hero.card.cta"]:hover,#mainBtn[data-act="app.signin"]:hover{background:rgba(255,255,255,.11)}
+.nofunds{background:rgba(255,255,255,.04);border:1px solid var(--line2)}
+.warn{background:rgba(255,255,255,.04);border:1px solid var(--line2)}
+.slipbox{border-radius:20px}
+
+/* token side: header → glowing dial → AI → facts → ask */
+.st-token{display:flex;flex-direction:column}
+#launchBlock{display:contents}
+.st-token .th{order:1;padding:24px 28px 0}
+.st-token .tscore{order:2}
+.st-token .aibrief{order:3}
+.st-token .tflags{order:4}.st-token .partial{order:5}.st-token .how{order:6}
+.st-token .tfacts{order:7}.st-token .tai{order:8}.st-token .tdisc{order:9}
+.st-token #stockBlock,.st-token #otherBlock{order:2}
+.tn{font-weight:600;font-size:19px}
+.ttag{background:rgba(255,255,255,.07)}
+.tscore{display:grid;grid-template-columns:1fr;justify-items:center;gap:6px;padding:10px 28px 14px}
+.tsr{width:100%;display:flex;flex-direction:column;align-items:center}
+.tscore .lbl{justify-content:center;gap:16px;margin:0}
+.tscore .cells10{display:none}
+.split{justify-content:center;font:400 12px var(--mono);color:var(--t3);margin-top:6px}
+.dialbox{position:relative;width:230px;height:230px;display:grid;place-items:center}
+.qdl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 22px rgba(204,255,0,.10))}
+.qdl path{fill:none;stroke:rgba(255,255,255,.08);stroke-width:6.5}
+.qdl path.on{stroke:rgba(238,240,245,.92)}
+.qdl path.tail{stroke:var(--lime)}
+@media (prefers-reduced-motion:no-preference){.qdl path{transition:stroke .4s ease}}
+.tscore .n,.dialbox .n{position:relative;font:300 84px/1 var(--sans);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.dialbox .n small{font:400 22px var(--sans);color:var(--t2);letter-spacing:0;margin-left:2px}
+.aibrief{margin:6px 24px 10px;border-radius:18px;background:rgba(204,255,0,.045);border-color:rgba(204,255,0,.18)}
+.aibrief p{font-size:15px}
+.tfacts{grid-template-columns:repeat(4,1fr);gap:8px;background:none;border:0;padding:4px 24px 0}
+.tfacts div{background:rgba(255,255,255,.035);border-radius:14px;padding:12px 12px;min-height:74px}
+.tfacts .k{font-size:12px}
+.tfacts .v{font:500 18px var(--sans)}
+.tai{padding:14px 24px 6px}
+.askb{background:rgba(255,255,255,.04)}
+.tdisc{padding:4px 24px 22px}
+.how,.tflags{background:rgba(0,0,0,.25)}
+.st-empty{padding:56px 28px;display:grid;place-items:center;min-height:100%}
+.emptydial{width:150px;height:150px;filter:drop-shadow(0 0 22px rgba(204,255,0,.12))}
+.qdial .sg{stroke:rgba(255,255,255,.10)}
+.st-reading .tscore .n{background:rgba(255,255,255,.05)}
+.skl,.skc{background:rgba(255,255,255,.06)}
+.stockrow .big{font-weight:300;font-size:52px;letter-spacing:-.04em}
+.noscore{border-top-color:var(--line2)}
+.swapc .tpanel{min-height:660px}
+.appmain{padding-top:28px}
+@media (max-width:1100px){
+  .swapc .appgrid{grid-template-columns:minmax(0,1fr)}
+  .swapc .swap{border-right:0;border-bottom:1px solid var(--line2)}
+  .swapc .tpanel{border-radius:0 0 32px 32px;min-height:0}
+}
+@media (max-width:520px){
+  .swapc .appgrid{border-radius:26px}
+  .swapc .swap{padding:16px 14px 18px}
+  .field{padding:14px 16px}
+  .amt{font-size:38px}
+  .dialbox{width:190px;height:190px}.tscore .n,.dialbox .n{font-size:68px}
+  .tfacts{grid-template-columns:repeat(2,1fr);padding:4px 16px 0}
+  .aibrief{margin:6px 16px 10px}.tai,.tdisc{padding-left:16px;padding-right:16px}.st-token .th{padding:20px 18px 0}
+}
+#swapMount:empty{min-height:660px}
+#swapMount[data-layout="app"]:empty{min-height:660px}
+@media (max-width:1100px){#swapMount:empty,#swapMount[data-layout="app"]:empty{min-height:1200px}}
+
+/* ============ landing ============ */
+.chero{position:relative;padding:36px 0 56px}
+.chero .wrap{max-width:var(--wrap)}
+.chead{text-align:center;margin-bottom:36px}
+.heye{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--t2);font:500 14px var(--sans);margin-bottom:22px}
+.heye::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+.chead h1{font:300 104px/0.98 var(--sans);letter-spacing:-.055em;max-width:1200px;margin:0 auto;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.58));-webkit-background-clip:text;background-clip:text;color:transparent}
+.chead .hlead{max-width:720px;margin:22px auto 0;font-size:19px;line-height:1.5;color:var(--t2)}
+.livenote{text-align:center;font-size:13px;color:var(--t3);margin-top:14px;min-height:20px}
+@media (max-height:940px) and (min-width:1101px){.chead h1{font-size:88px}.chero{padding-top:24px}.chead{margin-bottom:28px}.chead .hlead{margin-top:16px;font-size:18px}}
+
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+.cstrip{padding:24px 0 8px}.cstrip .wrap{max-width:var(--wrap)}
+.glassbar{display:flex;gap:56px;align-items:center;padding:20px 32px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.glassbar .sl{display:flex;align-items:center;gap:10px;margin-right:auto;font:500 15px var(--sans);color:var(--t1)}
+.glassbar div span{display:block;font-size:12px;color:var(--t2)}
+.glassbar b{font:500 22px var(--mono);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+.cs{padding:140px 0 0}.cs .wrap{max-width:var(--wrap)}
+.cgrid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center}
+.bh .ey{display:inline-flex;align-items:center;gap:8px;font:500 13px var(--sans);color:var(--t2);margin-bottom:20px}
+.bh h2{font:300 76px/1 var(--sans);letter-spacing:-.05em}
+.bh p{font-size:18px;color:var(--t2);margin-top:22px;max-width:480px}
+.more{display:inline-flex;align-items:center;gap:6px;color:var(--t1);font-weight:500;text-decoration:none;margin-top:26px}
+.more:hover svg{transform:translateX(3px)}.more svg{transition:transform .2s}
+.cpanel{border-radius:28px;padding:10px 24px 18px;background:var(--glass),rgba(255,255,255,.012);border:1px solid var(--line)}
+.ftabs{display:flex;gap:6px;padding:10px 0}
+.ftabs button{font:500 14px var(--sans);padding:8px 16px;border-radius:999px;border:0;background:transparent;color:var(--t2);cursor:pointer}
+.ftabs button.on{background:rgba(255,255,255,.08);color:var(--t1)}
+.frows{min-height:432px}
+.frow{display:grid;grid-template-columns:40px minmax(0,1fr) 140px 76px;gap:16px;align-items:center;min-height:72px;padding:12px 0;border-top:1px solid var(--line2);text-decoration:none;color:var(--t1)}
+.frow .tk{width:40px;height:40px;font-size:9px}
+.frow .fn{min-width:0}.frow .fn b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.frow .fn span{font-size:13px;color:var(--t2)}
+.frow:hover .fn b{text-decoration:underline;text-underline-offset:3px}
+.cells{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}.cells i{height:5px;border-radius:3px;background:rgba(255,255,255,.08)}.cells i.h{background:rgba(238,240,245,.85)}
+.fs{font:400 26px var(--sans);text-align:right;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.fs small{font-size:13px;color:var(--t2)}
+.fs.lo{color:#ff8a7f}.fs.mid{color:#ffcf7a}
+.frow.sk .tk,.frow.sk b,.frow.sk .fn span,.frow.sk .fs{background:rgba(255,255,255,.05);color:transparent;border-radius:8px}
+.ffoot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--line2);font-size:13px;color:var(--t3)}.ffoot .more{margin:0;font-size:14px}
+
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:32px 0 0;max-width:480px}
+.parts div{padding:18px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+.parts span{font-size:13px;color:var(--t2);display:block}.parts b{font:300 52px/1.1 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.scorevis2{display:grid;justify-items:center;gap:12px}
+.dialbox.big{width:380px;height:380px}
+.dialbox.big .qdl{filter:drop-shadow(0 0 40px rgba(204,255,0,.14))}
+.dialbox.big .qdl path{stroke-width:6}
+.dialbox.big .n{font-size:140px}.dialbox.big .n small{font-size:30px}
+.stok{display:flex;align-items:center;gap:8px;font-weight:500;min-height:28px}
+.sai{max-width:540px;padding:16px 18px;border-radius:18px;background:rgba(204,255,0,.045);border:1px solid rgba(204,255,0,.18)}
+.sai .aib-h{display:flex}.sai p{font-size:16px;line-height:1.5;min-height:3em}
+.sai .skl{display:block;height:10px;margin:7px 0}
+.snote{font-size:12px;color:var(--t3)}
+
+.routebox{padding:22px 24px}
+.chains{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;min-height:268px}
+.chn{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:rgba(255,255,255,.03);font-size:14px;white-space:nowrap;overflow:hidden}
+.chn img{border-radius:8px;flex:none}.chn span{overflow:hidden;text-overflow:ellipsis}
+.times{margin-top:18px;padding-top:14px;border-top:1px solid var(--line2);display:grid;gap:6px}
+.times .lab{font-size:12px;color:var(--t2);margin-bottom:2px}
+.trow{display:flex;align-items:center;gap:10px;font-size:14px}.trow img{border-radius:7px}.trow b{margin-left:auto;font:400 13px var(--mono);color:var(--t2)}
+
+.walletvis{padding:28px;display:grid;gap:18px;justify-items:start}
+.walletvis .signin{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.05)}
+.walletvis .signin span{padding:8px 18px;border-radius:999px;font-size:14px;color:var(--t2)}.walletvis .signin .on{background:rgba(255,255,255,.1);color:var(--t1)}
+.walletvis .steps{list-style:none;display:grid;gap:12px;width:100%}
+.walletvis .steps li{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line2);font-size:16px}
+.walletvis .c{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:rgba(255,255,255,.08);flex:none}
+.walletvis .done .c{background:rgba(204,255,0,.12);color:var(--lime)}
+
+.stockgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px;min-height:240px}
+.stile{display:grid;gap:4px;justify-items:start;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line2);text-decoration:none;color:var(--t1)}
+.stile:hover{background:rgba(255,255,255,.06)}
+.stile .tk{width:36px;height:36px;margin-bottom:6px}
+.stile b{font-weight:600}.stile span{font:400 13px var(--mono);color:var(--t2)}
+.stile i{font-style:normal}.stile i.up{color:var(--up)}.stile i.dn{color:var(--down)}
+.stile.sk .tk,.stile.sk b,.stile.sk span{background:rgba(255,255,255,.05);color:transparent;border-radius:8px}
+.snote2{display:inline-block;margin-top:18px;font-size:13px;color:var(--t2)}
+
+.cfinal{padding:160px 0 120px;text-align:center}
+.cfinal h2{font:300 84px/1 var(--sans);letter-spacing:-.055em;max-width:980px;margin:0 auto;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.6));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cform{display:flex;gap:8px;max-width:620px;margin:40px auto 0;padding:6px 6px 6px 22px;border-radius:999px;border:1px solid var(--glass-b);background:var(--glass),rgba(14,16,23,.7)}
+.cform:focus-within{border-color:rgba(204,255,0,.5)}
+.cform input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--t1);font:400 16px var(--sans)}
+.cform input::placeholder{color:var(--t2)}
+.cform .btn{height:48px;padding:0 24px}
+
+@media (max-width:1100px){
+  .cgrid{grid-template-columns:minmax(0,1fr);gap:36px}
+  .cs{padding-top:96px}
+  .glassbar{flex-wrap:wrap;gap:16px 32px;border-radius:24px}.glassbar .sl{width:100%}
+}
+@media (max-width:720px){
+  .chero{padding:18px 0 32px}.chead{margin-bottom:22px}
+  .chead h1{font-size:46px;letter-spacing:-.045em}.chead .hlead{font-size:16px;margin-top:14px}
+  .heye{font-size:12px;height:28px;margin-bottom:14px}
+  .bh h2{font-size:44px}.bh p{font-size:16px}
+  .cs{padding-top:72px}
+  .frow{grid-template-columns:36px minmax(0,1fr) 64px;gap:12px}.frow .cells{display:none}
+  .frows{min-height:0}
+  .dialbox.big{width:260px;height:260px}.dialbox.big .n{font-size:92px}
+  .chains{grid-template-columns:repeat(2,1fr)}
+  .stockgrid{grid-template-columns:repeat(2,1fr);padding:12px}
+  .cfinal{padding:96px 0 72px}.cfinal h2{font-size:44px}
+  .cform{flex-direction:column;border-radius:24px;padding:8px}.cform input{height:44px;padding:0 12px}.cform .btn{width:100%}
+  .glassbar{padding:18px 20px}.glassbar b{font-size:18px}
+}
+
+/* ============ other pages: shared surfaces ============ */
+footer{border-top:1px solid var(--line2);background:transparent}
+.disc p,.fgrid p{color:var(--t2)}
+.spanel{border-radius:20px}
+.wpanel{border-radius:24px}
+.modal{background:rgba(3,4,8,.55)}
+.sheet{border-radius:28px}
+.mh{color:var(--t2)}
+.x:hover{background:rgba(255,255,255,.08)}
+.done .ok{background:rgba(204,255,0,.12);color:var(--lime);box-shadow:0 0 0 1px rgba(204,255,0,.4)}
+.ptile,.prow{background:transparent}
+.ptile:hover,.prow:hover,.pnetlist button:hover,.pnetlist button.on{background:rgba(255,255,255,.06)}
+.ptile.on,.prow.on{background:rgba(204,255,0,.06);border-color:rgba(204,255,0,.4)}
+.pq{background:rgba(255,255,255,.05)}
+.plist{-webkit-backdrop-filter:none;backdrop-filter:none}
+.actrow:hover{background:rgba(255,255,255,.04)}
+@media (max-width:520px){.modal:has(.psheet){padding:0}.psheet{border-radius:24px 24px 0 0}}
+.tscore .ready{display:none}
+.dialbox .n small{font-size:18px}
+.tscore .n,.dialbox .n{font-size:76px}
+.dialbox.big .n{font-size:132px}.dialbox.big .n small{font-size:28px}
+.swapc .appgrid::before{top:120px}
+@media (max-width:1100px){.swapc .appgrid::before{display:none}}
+
+/* score tiers: soft tints, lime only on a strong score */
+.spill,.sbadge{background:rgba(204,255,0,.12);color:var(--lime);font-weight:600}
+.spill.hi{background:rgba(204,255,0,.12);color:var(--lime)}
+.spill.mid,.sbadge.mid{background:rgba(255,207,122,.12);color:#ffcf7a}
+.spill.lo,.sbadge.lo{background:rgba(255,95,82,.13);color:#ff8a7f}
+.spill.pend{background:rgba(255,255,255,.06);color:var(--t2)}
+.wload{font:400 15px var(--sans);color:var(--t2)}
+
+/* costly route, hard confirm in Review */
+.rcost{padding:14px 16px;border-radius:16px;background:rgba(255,95,82,.10);border:1px solid rgba(255,95,82,.28);display:grid;gap:4px}
+.rcost b{font-weight:600;color:#ff8a7f}.rcost p{font-size:14px;color:var(--t1)}.rcost .hint{color:var(--t2);font-size:13px}
+.mf .two .btn-lime{white-space:normal;line-height:1.15}
+/* the result sheet on 360–390 keeps everything inside */
+#phase,#revActs,.mf,.mb{min-width:0}
+.mf .two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:100%}
+.sheet .btn-wide{width:100%;box-sizing:border-box}
+.mf .note{overflow-wrap:anywhere}
+/* the quote rows keep their place, so the token card under the form never jumps */
+@media (max-width:1100px){.swapc.noquote #rrows{display:block;visibility:hidden}}
+/* headline: always two lines from 768 up; "Robinhood Chain." never breaks */
+.chead h1{font-size:clamp(56px,7.4vw,112px)}
+@media (max-height:940px) and (min-width:1101px){.chead h1{font-size:clamp(56px,6.2vw,96px)}}
+@media (max-width:767px){.chead h1{font-size:clamp(34px,10.6vw,46px)}.chead h1 br{display:none}}
+/* wallet steps: visible marks, token icon at form size, centred with the text */
+.walletvis .steps li{min-height:60px}
+.walletvis .c{width:28px;height:28px;background:rgba(255,255,255,.10);color:var(--t1);font:600 13px var(--sans)}
+.walletvis .done .c{background:rgba(204,255,0,.14);color:var(--lime);box-shadow:inset 0 0 0 1px rgba(204,255,0,.35)}
+.walletvis .now .c{background:rgba(255,255,255,.12);color:var(--t1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.walletvis .tok{display:flex;align-items:center;gap:10px}
+.tk.tkbrand{width:30px;height:30px;font:700 9px var(--sans);letter-spacing:.02em;color:#0a0b10;background:radial-gradient(circle at 30% 30%,#f2ffb3,#ccff00 60%,#9fcc00);flex:none}
+/* inline ticker icons sit on the text's centre line everywhere */
+.tk.tkin,.tl.tkin{vertical-align:middle}
+/* room for one warning once a token is in the form, so the card below does not jump */
+@media (max-width:1100px){.swapc.has-token:not(.selling) .warns{display:grid;min-height:58px;align-content:start}}
+.walletvis .steps li.done .c{background:rgba(204,255,0,.14)!important;color:var(--lime)!important}
+.walletvis .steps li .c svg{display:block}
+.walletvis .c{border:0}
+
+/* floating panels must stay readable over the big headline */
+.spanel,.wpanel,.sheet,.slipbox,.pnetlist,.msheet{background:var(--glass),rgba(12,14,20,.95)}
+/* score cells everywhere: white when lit, lime stays a point */
+.cells10 i{background:rgba(255,255,255,.08)}
+.cells10 i.h,.cells10 i.on{background:rgba(238,240,245,.88)}
+.cells10 i.m{background:rgba(238,240,245,.45)}
+@keyframes pls{50%{background:rgba(255,255,255,.22)}}
+@keyframes seg{from{background:rgba(255,255,255,.08);transform:scaleY(.6)}}
+@media (max-width:1100px){.swapc.has-token:not(.selling) .warns{min-height:72px}.swapc #rrows{min-height:236px}}
+@media (max-width:1100px){.swapc.selling #rrows{min-height:236px}}
+@media (max-width:520px){#rrows .rr:first-child{min-height:48px;align-items:flex-start}}
+/* the slab's two columns are one row: the divider runs the full height */
+.swapc .appgrid{align-items:stretch}
+/* warnings and quote details sit under the action, so reserved room never opens a gap above the button */
+.swapc:not(.selling) #paneSwap>.warns{order:2}.swapc:not(.selling) #paneSwap>#rrows{order:3}
+.swapc.selling #paneSwap>.warns{order:6}.swapc.selling #paneSwap>#rrows{order:7}
+.swapc #paneSwap>.warns{margin-top:10px}
+/* blur only on the slab and on modals: the sticky header stays solid on phones; no blur at all for reduced motion/transparency */
+@media (max-width:760px){.topnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,10,15,.96)}}
+@media (prefers-reduced-motion:reduce){.swapc .appgrid,.sheet,.wpanel,.spanel,.slipbox,.pnetlist,.msheet,.topnav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .swapc .appgrid{background:var(--glass),rgba(14,16,23,.94)}
+}
+
+/* landing sections: two columns share a top and a bottom line; the right column is one composition on one axis */
+.cgrid{align-items:stretch}
+.cgrid>.bh{display:flex;flex-direction:column;align-items:flex-start}
+.cgrid>.bh>.more,.cgrid>.bh>.snote2{margin-top:auto;padding-top:26px}
+.cgrid>.bh>.parts{margin-bottom:0}
+#score .bh>.more{margin-top:auto}
+.scorevis2{width:100%;max-width:560px;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.scorevis2 .dialbox.big{margin-top:-22px}
+.scorevis2 .stok{justify-content:center}
+.scorevis2 .sai{width:100%;max-width:none}
+.scorevis2 .snote{align-self:stretch;text-align:left;margin-top:auto}
+.cpanel{align-self:start;width:100%}
+
+#feed .bh,#route .bh,#wallet .bh,#stocks .bh{padding-top:14px}
+@media (max-width:1100px){.scorevis2 .dialbox.big{margin-top:0}.cgrid>.bh>.more,.cgrid>.bh>.snote2{margin-top:0}}
+/* dial box = ring (viewBox fitted to the mark) */
+.dialbox{width:176px;height:176px}
+.dialbox.big{width:300px;height:300px}
+.scorevis2 .dialbox.big{margin-top:0}
+@media (max-width:520px){.dialbox{width:150px;height:150px}}
+@media (max-width:720px){.dialbox.big{width:220px;height:220px}}
+.tscore{padding:16px 28px 16px;gap:10px}
+#stocks .cgrid{align-items:stretch}#stocks .stockgrid{align-self:stretch;align-content:center}
+@media (min-width:1101px){.dialbox.big{width:360px;height:360px}.dialbox.big .n{font-size:150px}}
+
+/* ===== one axis on every page: header, sections, slab and footer share --wrap (1360 content + 32 gutters) ===== */
+.topnav .in{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+@media (max-width:1000px){.topnav .in{padding:0 16px}}
+h1,h2,.chead h1,.bh h2,.cfinal h2{text-wrap:balance}
+.bh h2{font-size:clamp(44px,4.6vw,68px)}
+/* section columns: same top and bottom; the left column pushes its last element down */
+.cgrid{align-items:stretch}
+.cgrid>.bh{display:flex;flex-direction:column;align-items:flex-start}
+.cgrid>.bh>:last-child{margin-top:auto}
+.cgrid>.bh>p+:last-child{padding-top:26px}
+.cgrid>.cpanel{align-self:stretch}
+@media (max-width:1100px){.cgrid>.bh>:last-child{margin-top:0}}
+.cgrid>.bh>.times{width:100%;max-width:420px;border-top:1px solid var(--line2);margin-top:auto}
+#route .chains{grid-template-columns:repeat(3,1fr);align-content:start}
+#route .chains .chn:first-child{grid-column:span 2}
+.glassbar{justify-content:space-between}.glassbar .sl{margin-right:0}
+#stocks .stockgrid{align-content:stretch}
+
+/* slab: quote rows are always shown (as a dim skeleton before the first quote), so the form and the token side are
+   the same height by content and nothing below the button moves when the quote lands */
+.swapc #rrows{display:block}
+.swapc.noquote #rrows{display:block;visibility:visible;opacity:.4}
+.swapc .swap{display:flex;flex-direction:column}
+.swapc #paneSwap{flex:1}
+.swapc .tpanel{min-height:0}
+#swapMount:empty{min-height:720px}
+/* one warning keeps its place on both sides of the form */
+.swapc.has-token .warns{display:grid;min-height:72px;align-content:start}
+
+/* floating layers are nearly opaque */
+:root{--panel-float:rgba(12,14,20,.95)}
+.spanel,.wpanel,.sheet,.slipbox,.pnetlist,.msheet{background:var(--glass),var(--panel-float)!important}
+
+/* contrast: tertiary text reaches AA on the page and on glass; lines that carry meaning use the secondary tone */
+:root{--t3:#7d8494}
+.split,.livenote,.snote,.caprow,.ffoot,.tdisc{color:var(--t2)}
+
+/* Review on phones: the sheet may use the full height before it scrolls; two buttons stack under 400px */
+@media (max-width:420px){.sheet:not(.psheet){height:calc(100dvh - 16px)}.modal:has(#review:not([hidden])),#review{padding:8px}}
+@media (max-width:400px){.mf .two{grid-template-columns:minmax(0,1fr)}}
+#vRows .rcost{margin-top:12px}
+
+/* small fixes */
+.wrow .sn i{white-space:normal}
+.xr .tok b,.stile b{overflow-wrap:break-word;hyphens:auto}
+/* while a token is read, its side keeps a full card's height */
+.swapc[data-state="reading"] .tpanel{min-height:640px}
+@media (max-width:1100px){.swapc[data-state="reading"] .tpanel{min-height:620px}}
+@media (min-width:1101px){.swapc.has-token .warns{min-height:0}.swapc.has-token .warns:empty{display:none}}
+
+/* ===== hero: the address field comes first, three live examples under it ===== */
+.heye{height:36px;padding:0 16px;font-size:16px;margin-bottom:24px}
+.hcheck{display:flex;align-items:center;gap:10px;max-width:640px;margin:28px auto 0;height:64px;padding:0 8px 0 22px;border-radius:999px;border:1px solid var(--glass-b);background:var(--glass),rgba(12,14,20,.92);color:var(--t2)}
+.hcheck:focus-within{border-color:rgba(204,255,0,.55)}
+.hcheck svg{flex:none}
+.hcheck input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--t1);font:400 17px var(--sans)}
+.hcheck input::placeholder{color:var(--t2)}
+.hcheck .btn{height:48px;padding:0 24px;font-size:16px}
+.htry{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;min-height:44px}
+.htry .lab{margin:0;font-size:13px;color:var(--t2)}
+.trychips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.trychip{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 10px 0 6px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--t1);cursor:pointer;font:inherit}
+.trychip:hover{background:rgba(255,255,255,.08)}
+.trychip .tk{width:30px;height:30px;font-size:8px}
+.trychip .tcl{display:grid;text-align:left;line-height:1.15}.trychip .tcl b{font:600 13px var(--sans)}.trychip .tcl i{font:400 11px var(--mono);color:var(--t2);font-style:normal}
+.trychip .spill{height:24px;font-size:12px;padding:0 8px}
+.livelbl{font:500 12px var(--sans);color:var(--lime);margin-bottom:2px;letter-spacing:.01em}
+.slabel{font:500 13px var(--sans);color:var(--lime);min-height:20px}
+/* AI first, its full explanation right under it, then the facts */
+.st-token .aibrief{order:3}.st-token .tai{order:4;padding-top:0}.st-token .tflags{order:5}.st-token .partial{order:6}.st-token .how{order:7}.st-token .tfacts{order:8}.st-token .tdisc{order:9}
+/* not found: hint, Explore and the examples */
+.st-missing{padding:40px 28px;display:grid;gap:12px;align-content:start;justify-items:start}
+.missmsg{padding:0;font:500 19px var(--sans)}
+.misshint{color:var(--t2);font-size:15px}
+.misslink{margin-top:4px}
+.st-missing .trychips{justify-content:flex-start;margin-top:8px}
+@media (max-width:720px){.hcheck{height:56px;padding-left:16px;margin-top:20px}.hcheck input{font-size:15px}.hcheck .btn{height:42px;padding:0 16px;font-size:14px}.heye{height:30px;font-size:13px}}
+@media (max-width:420px){.hcheck svg{display:none}.trychip .tcl i{display:none}}
+
+/* ===== phones: the token, its score, Quoro AI and flags come before the form ===== */
+@media (max-width:767px){
+  .swapc .appgrid{display:flex;flex-direction:column}
+  .swapc .tpanel{order:-1;border-radius:26px 26px 0 0;border-bottom:1px solid var(--line2)}
+  .swapc .swap{border-bottom:0}
+  .swapc.has-token .warns{min-height:0}
+  .swapc .tpanel:has(.st-empty:not([hidden])){display:none}
+}
+@media (max-width:767px){
+  .swapc.has-token .warns,.swapc.has-token:not(.selling) .warns{min-height:0!important}
+  .swapc.has-token .warns:empty{display:none}
+  .swapc #rrows{min-height:0!important}
+  .swapc.noquote #rrows{display:none!important}
+}
+@media (max-width:767px){.aibrief p{min-height:calc(1.45em * 5)}.aibrief.loading p{min-height:calc(1.45em * 5)}}
+@media (max-width:767px){.swapc[data-state="reading"] .tpanel{min-height:940px}.swapc:not(.selling) #paneSwap>.warns,.swapc.selling #paneSwap>.warns{order:8}}
+.trychip.sk{width:176px;border-color:transparent;background:rgba(255,255,255,.04)}
+.walletvis .connect{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px 0 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font:600 15px var(--sans)}
+.walletvis .connect .wico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(204,255,0,.14);color:var(--lime)}
+/* X link (mark, not a word) */
+.xlink{display:inline-flex;align-items:center;gap:8px}
+.xmark{flex:none}
+.dfollow{margin:56px 0 0;font-size:16px}.dfollow a{display:inline-flex;align-items:center;gap:8px;color:var(--t1)}
+.fgrid{grid-template-columns:1fr auto auto auto}
+@media (max-width:720px){.fgrid{grid-template-columns:1fr 1fr}.fgrid>div:first-child{grid-column:1/-1}}
+/* explore: 50 rows at a time */
+.xmore{display:flex;margin:20px auto 0;height:44px;padding:0 24px}
+/* phones: an address typed or pasted into the form opens its card under the form, so the field never moves */
+@media (max-width:767px){.swapc.anchored .tpanel{order:1;border-radius:0 0 26px 26px;border-top:1px solid var(--line2);border-bottom:0}}
+/* the receive field keeps one height with or without a token, so the button under it never moves */
+.swapc:not(.selling) .f-get{min-height:149px}
+@media (max-width:520px){.swapc:not(.selling) .f-get{min-height:132px}}

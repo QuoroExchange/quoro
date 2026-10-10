@@ -1,0 +1,73 @@
+<!doctype html>
+<!-- Quoro explore: Robinhood Chain tokens with their Data score. -->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07080c">
+<title data-slot="meta.explore.title">Tokens on Robinhood Chain · Quoro</title>
+<meta name="description" content="Launches and stock tokens on Robinhood Chain, with Data scores, market cap and volume. Buy any of them in one signature from 17 chains." data-slot="meta.explore.description">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://127.0.0.1:8795/explore">
+<meta property="og:title" content="Tokens on Robinhood Chain · Quoro" data-slot="meta.explore.title">
+<meta property="og:description" content="Launches and stock tokens on Robinhood Chain, with Data scores, market cap and volume. Buy any of them in one signature from 17 chains." data-slot="meta.explore.description">
+<meta property="og:image" content="http://127.0.0.1:8795/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A Robinhood Chain token checked by Quoro: Data score and a one-line AI explanation." data-slot="og.image.alt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@quoroexchange" data-slot="meta.twitter.site">
+<meta name="twitter:creator" content="@quoroexchange" data-slot="meta.twitter.creator">
+<meta name="twitter:image" content="http://127.0.0.1:8795/assets/og.png">
+<link rel="icon" href="/assets/brand/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/c.css">
+</head>
+<body class="is-app">
+<header class="topnav" id="topnav">
+  <div class="in">
+    <div class="navl">
+      <a class="brand" href="/" aria-label="Quoro" data-slot-aria="logo.alt"><svg class="bm" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M27.27 23.02 A10 10 0 0 1 23.02 27.27" fill="none" stroke="#ccff00" stroke-width="7" stroke-linecap="butt"/><path d="M19.15 24.10 A10 10 0 0 1 13.87 24.94" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M13.01 24.80 A10 10 0 0 1 8.24 22.37" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M7.63 21.76 A10 10 0 0 1 5.20 16.99" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M5.06 16.13 A10 10 0 0 1 5.90 10.85" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M6.30 10.08 A10 10 0 0 1 10.08 6.30" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M10.85 5.90 A10 10 0 0 1 16.13 5.06" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M16.99 5.20 A10 10 0 0 1 21.76 7.63" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M22.37 8.24 A10 10 0 0 1 24.80 13.01" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/><path d="M24.94 13.87 A10 10 0 0 1 24.10 19.15" fill="none" stroke="#f5f5f5" stroke-width="6" stroke-linecap="butt"/></svg><svg class="wm" width="63" height="21" viewBox="0 0 102 34" fill="none" stroke-width="4" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="16" r="7" stroke="#f5f5f5"/><path d="M16 9 V31" stroke="#f5f5f5"/><path d="M24 9 V16 a7 7 0 0 0 14 0 V9 M38 9 V23" stroke="#f5f5f5"/><circle cx="52" cy="16" r="7" stroke="#f5f5f5"/><path d="M66 23 V9 M66 16 a7 7 0 0 1 7 -7 h2" stroke="#f5f5f5"/><circle cx="88" cy="16" r="7" stroke="#f5f5f5"/></svg></a>
+      <nav class="links" aria-label="Main"><a href="/app" data-slot="nav.swap">Buy</a><a href="/explore" aria-current="page" data-slot="nav.explore">Explore</a><a href="/docs#score" data-slot="nav.score">Data score</a><a href="/portfolio" data-slot="nav.portfolio" data-when="in" hidden>Portfolio</a></nav>
+    </div>
+    <form class="nsearch" action="/explore" method="get" role="search"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input name="ca" aria-label="Search tokens or paste an address" placeholder="Search tokens or paste an address" data-slot="nav.search" autocomplete="off" spellcheck="false"><kbd aria-hidden="true">/</kbd></form>
+    <div class="navr"><button class="mbtn" type="button" id="mBtn" aria-label="Menu" data-slot-aria="nav.menu" aria-expanded="false" aria-controls="mSheet"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button><button class="btn btn-lime" type="button" id="navSignIn" data-slot="nav.signin">Connect wallet</button><button class="btn acct" type="button" id="navAcct" hidden></button></div>
+  </div>
+  <nav class="msheet" id="mSheet" aria-label="Menu" hidden><a href="/app" data-slot="nav.swap">Buy</a><a href="/explore" data-slot="nav.explore">Explore</a><a href="/docs#score" data-slot="nav.score">Data score</a><a href="/docs" data-slot="footer.links.docs">Docs</a><a href="/portfolio" data-slot="nav.portfolio" data-when="in" hidden>Portfolio</a></nav>
+</header>
+<main class="wrap">
+  <div class="xhead"><h1 data-slot="explore.title">Robinhood Chain launches, scored.</h1><p data-slot="explore.sub">Every new launch gets a Data score within about a minute. Open one to see the flags behind it.</p></div>
+  <div class="xbar">
+    <div class="xtabs" role="tablist"><button role="tab" class="on" aria-selected="true" data-sort="all" data-slot="explore.tab.all">All</button><button role="tab" aria-selected="false" data-sort="trending" data-slot="explore.tab.trending">Trending</button><button role="tab" aria-selected="false" data-sort="recent" data-slot="explore.tab.recent">New</button><button role="tab" aria-selected="false" data-sort="stocks" data-slot="explore.tab.stocks">Stock tokens</button></div>
+    <label class="nsearch xsearch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="xq" aria-label="Search by name, ticker or address" placeholder="Search by name, ticker or address" data-slot="explore.search" autocomplete="off" spellcheck="false"></label>
+  </div>
+  <div class="xtable" id="xtable" aria-live="polite">
+    <div class="xr xhd xl" role="row"><span class="rk" data-slot="explore.col.rank">#</span><span data-slot="explore.col.token">Token</span><span class="num c-mcap" data-slot="explore.col.mcap">Market cap</span><span class="num c-1h" data-slot="explore.col.1h">1h</span><span class="num c-24h" data-slot="explore.col.24h">24h</span><span class="num c-vol" data-slot="explore.col.vol">24h volume</span><span class="num" data-slot="explore.col.score">Data score</span><span class="num c-age" data-slot="explore.col.age">Age</span></div>
+    <div class="xr xhd xs" role="row" hidden><span class="rk" data-slot="explore.col.rank">#</span><span data-slot="explore.col.token">Token</span><span class="num" data-slot="explore.col.price">Price</span><span class="num" data-slot="explore.col.24h">24h</span></div>
+    <div id="xrows"></div>
+  </div>
+  <p class="xnote" id="xnote" hidden data-slot="explore.stocks.note">Not available to persons in the US. Restricted in Canada, the UK, Switzerland and other countries.</p>
+</main>
+<footer class="appfoot">
+  <div class="wrap">
+    <nav class="flinks" aria-label="Footer"><a href="/app" data-slot="footer.links.app">Open Quoro</a><a href="/explore" data-slot="footer.links.explore">Explore</a><a href="/docs" data-slot="footer.links.docs">Docs</a><a href="/docs#score" data-slot="footer.links.how">How it’s counted</a><a href="https://x.com/quoroexchange" target="_blank" rel="noopener" class="xlink"><svg class="xmark" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77zm-1.08 16.18h1.7L7.4 4.73H5.58z"/></svg><span data-slot="footer.links.x">X · @quoroexchange</span></a></nav>
+    <p class="fchain"><span class="dot"></span><span data-slot="footer.chain">Robinhood Chain · block <span data-pulse="block">—</span></span></p>
+    <div class="disc">
+      <p data-slot="footer.legal">The Data score is computed from public on-chain data at the time shown and does not predict prices. Nothing here is financial advice. Quoro does not hold funds, and you sign every transaction yourself.</p>
+      <p data-slot="footer.stocks">Stock tokens are not available to persons in the United States and are restricted in Canada, the United Kingdom, Switzerland and other countries. Check the rules where you live before you buy.</p>
+      <p data-slot="footer.copy">© 2026 Quoro</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/boot.js"></script>
+<script>if(window.QUORO_MOCK)document.write('<script src="/js/mock.js"><\/script>')</script>
+<script src="/js/api.js"></script>
+<script src="/js/wallet.js"></script>
+<script src="/js/ui.js"></script>
+<script src="/js/shell.js"></script>
+<script src="/js/explore.js"></script>
+</body>
+</html>

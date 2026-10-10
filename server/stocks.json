@@ -1,0 +1,514 @@
+[
+{
+"ticker": "SPY",
+"name": "SPDR S&P 500",
+"type": "etf",
+"token": "0x117cc2133c37b721f49de2a7a74833232b3b4c0c",
+"pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+"fee": 500
+},
+{
+"ticker": "QQQ",
+"name": "Invesco QQQ",
+"type": "etf",
+"token": "0xd5f3879160bc7c32ebb4dc785f8a4f505888de68",
+"pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+"fee": 500
+},
+{
+"ticker": "GLD",
+"name": "SPDR Gold Trust",
+"type": "etf",
+"token": "0xc9a981fee1f9dec688bb123ccdecc63d0debfc4e",
+"pool": "0xba2f1ed4ceb2169d538d1e614d847e83c5a55913",
+"fee": 500
+},
+{
+"ticker": "SOXX",
+"name": "iShares Semiconductor ETF",
+"type": "etf",
+"token": "0x75742c18bc1f1c5c5f448f4c9d9c6f66dafaaa38",
+"pool": "0x0663e66c880e27a5ce3c4c25234ab64ead7dff67",
+"fee": 3000
+},
+{
+"ticker": "SGOV",
+"name": "iShares 0-3 Month Treasury Bond",
+"type": "etf",
+"token": "0x92fd66527192e3e61d4ddd13322aa222de86f9b5",
+"pool": "0x6ba50150b17ffd0972915aaf04ffd5e8f4fa49b4",
+"fee": 500
+},
+{
+"ticker": "VTI",
+"name": "Vanguard Morningstar Total Stock Market ETF",
+"type": "etf",
+"token": "0x0594134df3f171a354d9c85ebd65b7a6148f6d09",
+"pool": "0xb78dd1a97fa544c65d7d1f12453ecaaf1e05c36d",
+"fee": 10000
+},
+{
+"ticker": "USO",
+"name": "United States Oil Fund",
+"type": "etf",
+"token": "0xa30fa36db767ad9ed3f7a60fc79526fb4d56d344",
+"pool": "0x02175608f1b5e6b5ed221ccfdc7be197d111d915",
+"fee": 3000
+},
+{
+"ticker": "SLV",
+"name": "iShares Silver Trust",
+"type": "etf",
+"token": "0x411efb0e7f985935daec3d4c3ebaea0d0ad7d89f",
+"pool": "0x8cb787e6c315d464775289bad00fdd67d53ecb3d",
+"fee": 3000
+},
+{
+"ticker": "NVDA",
+"name": "NVIDIA",
+"type": "stock",
+"token": "0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec",
+"pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+"fee": 500
+},
+{
+"ticker": "AAPL",
+"name": "Apple",
+"type": "stock",
+"token": "0xaf3d76f1834a1d425780943c99ea8a608f8a93f9",
+"pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+"fee": 500
+},
+{
+"ticker": "GOOGL",
+"name": "Alphabet",
+"type": "stock",
+"token": "0x2e0847e8910a9732eb3fb1bb4b70a580adad4fe3",
+"pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+"fee": 500
+},
+{
+"ticker": "MSFT",
+"name": "Microsoft",
+"type": "stock",
+"token": "0xe93237c50d904957cf27e7b1133b510c669c2e74",
+"pool": "0xeb60bcd1d920ad6e102690ccfc6fb488899e1510",
+"fee": 3000
+},
+{
+"ticker": "AMZN",
+"name": "Amazon",
+"type": "stock",
+"token": "0x12f190a9f9d7d37a250758b26824b97ce941bf54",
+"pool": "0x8ac92da74ab5f3b1d024dc1943ad7e15dc4179ef",
+"fee": 3000
+},
+{
+"ticker": "TSM",
+"name": "TSMC",
+"type": "stock",
+"token": "0x58ffe4a942d3885baa22d7520691f611ef09e7aa",
+"pool": "0x07e8ea83d4c1340774c8965125e26e12bf943bf1",
+"fee": 10000
+},
+{
+"ticker": "SPCX",
+"name": "SpaceX",
+"type": "stock",
+"token": "0x4a0e65a3eccec6dbe60ae065f2e7bb85fae35eea",
+"pool": "0xc61284332117c3fb23a2a56cceffd07f7af60029",
+"fee": 500
+},
+{
+"ticker": "META",
+"name": "Meta Platforms",
+"type": "stock",
+"token": "0xc0d6457c16cc70d6790dd43521c899c87ce02f35",
+"pool": "0x107a7cb40d8665360ba10e59471af06150a50922",
+"fee": 3000
+},
+{
+"ticker": "AVGO",
+"name": "Broadcom",
+"type": "stock",
+"token": "0x156e175dd063a8ce274c50654ef40e0032b3fbcf",
+"pool": "0x5b7c404f1d7d77f9f3885ab13d7764f8a173028c",
+"fee": 3000
+},
+{
+"ticker": "TSLA",
+"name": "Tesla",
+"type": "stock",
+"token": "0x322f0929c4625ed5bad873c95208d54e1c003b2d",
+"pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+"fee": 3000
+},
+{
+"ticker": "SKHY",
+"name": "SK hynix",
+"type": "stock",
+"token": "0x84cab63bc87912e71ad199ff14a0ba45de68fef8",
+"pool": "0x5f2a5025feb93a4c44da4e3b37e4fd3fb0ab5171",
+"fee": 3000
+},
+{
+"ticker": "MU",
+"name": "Micron Technology",
+"type": "stock",
+"token": "0xff080c8ce2e5feadaca0da81314ae59d232d4afd",
+"pool": "0xd057b1bc54917855bbee58ead58647f47cab35e5",
+"fee": 3000
+},
+{
+"ticker": "LLY",
+"name": "Eli Lilly",
+"type": "stock",
+"token": "0x8005d266423c7ea827372c9c864491e5786600ea",
+"pool": "0xf212d02146a897f5f686e9d629f6a73da534324a",
+"fee": 500
+},
+{
+"ticker": "AMD",
+"name": "AMD",
+"type": "stock",
+"token": "0x86923f96303d656e4aa86d9d42d1e57ad2023fdc",
+"pool": "0x48d284a2a4d3dc1b3da08231fe44317e7e7aa51f",
+"fee": 3000
+},
+{
+"ticker": "ASML",
+"name": "ASML Holding",
+"type": "stock",
+"token": "0x47f93d52cbec7c6d2cfc080e154002370a60daea",
+"pool": "0xedb22516b14eb2d1c86927db373b0e8bf70f5cd1",
+"fee": 10000
+},
+{
+"ticker": "JNJ",
+"name": "Johnson & Johnson",
+"type": "stock",
+"token": "0x03dfbbe0ac4e7bcdafd08ed41a400326b77d8c80",
+"pool": "0x7f0ace18d1dced47063cf26e649bc8ab14d09e67",
+"fee": 3000
+},
+{
+"ticker": "INTC",
+"name": "Intel",
+"type": "stock",
+"token": "0xc72b96e0e48ecd4dc75e1e45396e26300bc39681",
+"pool": "0x2e5a92f5013a64661a49312111be2e8abd33f56a",
+"fee": 3000
+},
+{
+"ticker": "PLTR",
+"name": "Palantir Technologies",
+"type": "stock",
+"token": "0x894e1ec2d74ffe5aef8dc8a9e84686accb964f2a",
+"pool": "0x851680416a4f4e1c463d45171d61acddbc8554c0",
+"fee": 3000
+},
+{
+"ticker": "COST",
+"name": "Costco",
+"type": "stock",
+"token": "0x4ea005168d7f09a7a0ba9d1def21a479950e44c2",
+"pool": "0x0a2121a50a09ed0796ae81f9c53ff9398355a398",
+"fee": 3000
+},
+{
+"ticker": "DELL",
+"name": "Dell",
+"type": "stock",
+"token": "0x941ae714ec6d8130c7b75d67160ca08f1e7d11dd",
+"pool": "0xc30c89cb7815a1488b7998d15eec73961707fc5a",
+"fee": 10000
+},
+{
+"ticker": "NFLX",
+"name": "Netflix",
+"type": "stock",
+"token": "0xe0444ef8bf4ed74f74fd73686e2ddf4c1c5591e8",
+"pool": "0x59895c0302f41aeaa129d2fa2442cec01e7ef45e",
+"fee": 3000
+},
+{
+"ticker": "BABA",
+"name": "Alibaba",
+"type": "stock",
+"token": "0xad25ac6c84d497db898fa1e8387bf6af3532a1c4",
+"pool": "0xa57ab582b310dd6f9e934ea1eeea152741545e6a",
+"fee": 3000
+},
+{
+"ticker": "SNDK",
+"name": "Sandisk",
+"type": "stock",
+"token": "0xb90a19ff0af67f7779aff50a882a9cff42446400",
+"pool": "0xa1e1c9519cd5ae47e9a935645e1a7b935b944559",
+"fee": 10000
+},
+{
+"ticker": "MRVL",
+"name": "Marvell Technology",
+"type": "stock",
+"token": "0x62fd0668e10d8b72339be2dcf7643001688ff13b",
+"pool": "0x06cc0b96be1fa1d754ce2e1228f5d8c616f795b0",
+"fee": 10000
+},
+{
+"ticker": "IBM",
+"name": "IBM",
+"type": "stock",
+"token": "0x980dcf6766fa79f5cf0c4aadb3ab477ff15a9619",
+"pool": "0x8cd848ce18b829c5c769aff27164078bb52e0e97",
+"fee": 3000
+},
+{
+"ticker": "SHOP",
+"name": "Shopify",
+"type": "stock",
+"token": "0xf53f66751b1eff985311b693531e3290f600c410",
+"pool": "0x18a1afa849a6940870c2163b7ecbcc85d455ad99",
+"fee": 10000
+},
+{
+"ticker": "PFE",
+"name": "Pfizer",
+"type": "stock",
+"token": "0x7066a64c24e4206cd62e83bf198c1e7eb361f51e",
+"pool": "0xc7d573fcda6d2107c97fb582ae18411f9db32e7f",
+"fee": 3000
+},
+{
+"ticker": "BA",
+"name": "Boeing",
+"type": "stock",
+"token": "0x4d21483a44bf67a86b77e3da301411880797d452",
+"pool": "0xc6517047b189c72d3baa9ef37d1d28f27a63638a",
+"fee": 3000
+},
+{
+"ticker": "NET",
+"name": "Cloudflare",
+"type": "stock",
+"token": "0x116f00968269b7bfbad4109ce591d6e74c0601d4",
+"pool": "0xa9caebb1b2fb2b954f192572b309aef1caf6a330",
+"fee": 3000
+},
+{
+"ticker": "LMT",
+"name": "Lockheed",
+"type": "stock",
+"token": "0x329fcaceb9ad6f9580dd5f643fed0646900d043c",
+"pool": "0x54f160bea60ec5207918c539d86e0b906b4da297",
+"fee": 3000
+},
+{
+"ticker": "SNOW",
+"name": "Snowflake",
+"type": "stock",
+"token": "0xba0cab75495255d0cb58e22b648bfed4ecd1f47e",
+"pool": "0xe0ca1dfc1161500fb410c8181f7cc33860ffb16b",
+"fee": 3000
+},
+{
+"ticker": "BE",
+"name": "Bloom Energy",
+"type": "stock",
+"token": "0x822cc93ffd030293e9842c30bbd678f530701867",
+"pool": "0x1bad145c8f06444e0df81c28257cd20231bd1f16",
+"fee": 3000
+},
+{
+"ticker": "UPS",
+"name": "UPS",
+"type": "stock",
+"token": "0xf23250dac154d05bb671cb0d0ebef3c635c79ce2",
+"pool": "0x5c67a84ec5494ffe24e217b28debb96341014c86",
+"fee": 3000
+},
+{
+"ticker": "MRNA",
+"name": "Moderna",
+"type": "stock",
+"token": "0x43b07d15ce533bec5476d70c22a78a1b2b662155",
+"pool": "0xb40196272a6d2eb5edf6d93bc4dc39856ad95e0e",
+"fee": 3000
+},
+{
+"ticker": "MSTR",
+"name": "Strategy",
+"type": "stock",
+"token": "0xec262a75e413fafd0df80480274532c79d42da09",
+"pool": "0x17578c0e0d15da44f31677263114f71ae76653ea",
+"fee": 10000
+},
+{
+"ticker": "F",
+"name": "Ford Motor",
+"type": "stock",
+"token": "0x25c288e6d899b9bc30160965ad9644c67e73be0c",
+"pool": "0x4dbac19e895322ac5b93abad9008691632bffc05",
+"fee": 3000
+},
+{
+"ticker": "TTWO",
+"name": "Take-Two Interactive Software",
+"type": "stock",
+"token": "0x5e81213613b6b86eab4c6c50d718d34359459786",
+"pool": "0xd9ab4b7fae6dc2f7020134ec744a8f53ef3e5e24",
+"fee": 3000
+},
+{
+"ticker": "RBLX",
+"name": "Roblox",
+"type": "stock",
+"token": "0xf0c4bf4c582cb3836e98394b1d4e7b7281101be8",
+"pool": "0x1bdb8e3a79cb1a7f228808739311e23098d33d43",
+"fee": 3000
+},
+{
+"ticker": "ON",
+"name": "ON Semiconductor",
+"type": "stock",
+"token": "0xbbd09f72b025360fee5c928053dca6248d35be54",
+"pool": "0xfce637eead7d62d9ed27f81d9767de03e9e534cf",
+"fee": 10000
+},
+{
+"ticker": "RDDT",
+"name": "Reddit",
+"type": "stock",
+"token": "0x05b37fb53a299a1b874a619e1c4c404d52c36f4c",
+"pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+"fee": 10000
+},
+{
+"ticker": "CRCL",
+"name": "Circle Internet Group",
+"type": "stock",
+"token": "0xdf0992e440dd0be65bd8439b609d6d4366bf1cb5",
+"pool": "0x654e4143e82a5824445ade0824351c2a9acd95a8",
+"fee": 3000
+},
+{
+"ticker": "RIVN",
+"name": "Rivian Automotive",
+"type": "stock",
+"token": "0xb1bf26c1d20ff267a4f93550d1e0d06ac40a114b",
+"pool": "0xb30a75b200d98a600a3766869344928e35823e23",
+"fee": 10000
+},
+{
+"ticker": "GME",
+"name": "GameStop",
+"type": "stock",
+"token": "0x1b0e319c6a659f002271b69db8a7df2f911c153e",
+"pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+"fee": 500
+},
+{
+"ticker": "FIG",
+"name": "Figma",
+"type": "stock",
+"token": "0x41f4267525a8aff329540ef24fd83d9044758b33",
+"pool": "0xca5904c0a9d42f0ec1bf760fdf779907877144fd",
+"fee": 3000
+},
+{
+"ticker": "LULU",
+"name": "Lululemon",
+"type": "stock",
+"token": "0x4e62068525ab11fe768e29dfd00ef909b9803016",
+"pool": "0x0f4227d27082b3bca6818381b9ea6460275e49f4",
+"fee": 3000
+},
+{
+"ticker": "GLXY",
+"name": "Galaxy Digital",
+"type": "stock",
+"token": "0x2d427692e928fa156ec22acfabafa0447c5805b7",
+"pool": "0xc67c2d200e0b7e5d99f4cfbede8cb09b48892f2c",
+"fee": 3000
+},
+{
+"ticker": "SNAP",
+"name": "Snap",
+"type": "stock",
+"token": "0xf6589f11bc40b669e584073f428b05562f568733",
+"pool": "0x0ebd4650c9e641e9745b5a508a2d46935dfe753e",
+"fee": 3000
+},
+{
+"ticker": "HIMS",
+"name": "Hims & Hers Health",
+"type": "stock",
+"token": "0xccee82fe024c36fa15e1005ede3e9e4787e23d09",
+"pool": "0xc8c90d3a1c1a24967e773ac2ad0d456ba3e31f64",
+"fee": 3000
+},
+{
+"ticker": "USAR",
+"name": "USA Rare Earth",
+"type": "stock",
+"token": "0xd917b029c761d264c6a312bbbcda868658ef86a6",
+"pool": "0x04391780f519b7d3ba59c9590459d76e23d225c4",
+"fee": 3000
+},
+{
+"ticker": "BB",
+"name": "BlackBerry",
+"type": "stock",
+"token": "0x48e39e56acdba37b09020c0b734a613c9a2f100a",
+"pool": "0xc424e56e816f148a8b30ccbde2128e04d21f51e9",
+"fee": 10000
+},
+{
+"ticker": "PENG",
+"name": "Penguin Solutions",
+"type": "stock",
+"token": "0x9b23573b156b52565012f5ce02cdf60afbaa70be",
+"pool": "0x1cd650500fa6f07646361f5f508aa6fbf7ddad36",
+"fee": 3000
+},
+{
+"ticker": "AMC",
+"name": "AMC Entertainment",
+"type": "stock",
+"token": "0x05a3d1cd21d0c88145e82600e62e7e496e0f222b",
+"pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+"fee": 3000
+},
+{
+"ticker": "DJT",
+"name": "Trump Media & Technology Group",
+"type": "stock",
+"token": "0x1d11f0496982706c5e14a514d4e79f2e6bde4516",
+"pool": "0x31a89afd92f9397465649ad03226c52292fc1ae5",
+"fee": 10000
+},
+{
+"ticker": "QUBT",
+"name": "Quantum Computing",
+"type": "stock",
+"token": "0x59818904ab4ce163b3ce4ffb64f2d6ca02c434b4",
+"pool": "0x227bbce9a81b3694b01754298a983be3f9e44a93",
+"fee": 3000
+},
+{
+"ticker": "RCAT",
+"name": "Red Cat",
+"type": "stock",
+"token": "0xfde6b5d9bb419b10c23268c74e369abff39c0460",
+"pool": "0x64710a70839585af718e1b1faef9e7f1665f1116",
+"fee": 10000
+},
+{
+"ticker": "WYFI",
+"name": "WhiteFiber",
+"type": "stock",
+"token": "0x9e7abd3c9139d14e4c86dce0e455aab7a0c2fb3e",
+"pool": "0x2a3063e34c60253abb23c2442f4cdfbc5cbd02c2",
+"fee": 3000
+}
+]
