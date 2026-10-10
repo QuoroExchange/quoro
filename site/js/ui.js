@@ -93,6 +93,8 @@
       fillLogos(box);
     }).catch(function () { box.hidden = true; });
   }
+  /* "QUADRA · QUADRA" reads once: the ticker only when it differs from the name */
+  function nameTick(n, t) { return !t || String(n).toLowerCase() === String(t).toLowerCase() ? String(n || t || '') : n + ' · ' + t; }
   function actAttrs(r) { return r.explorerUrl ? 'href="' + esc(r.explorerUrl) + '" target="_blank" rel="noopener"' : ''; }
   var fmt = {
     int: function (n) { return n == null ? '—' : Math.round(n).toLocaleString('en-US'); },
@@ -123,5 +125,5 @@
     });
   });
 
-  window.QuoroUI = { pickExamples: pickExamples, tryChips: tryChips, actLines: actLines, actTail: actTail, actAttrs: actAttrs, tokIco: tokIco, fillLogos: fillLogos, logoImg: logoImg, ago: function (m) { return fmt.mins(m); }, RM: RM, el: el, esc: esc, fmt: fmt, tpl: tpl, isAddr: isAddr };
+  window.QuoroUI = { nameTick: nameTick, pickExamples: pickExamples, tryChips: tryChips, actLines: actLines, actTail: actTail, actAttrs: actAttrs, tokIco: tokIco, fillLogos: fillLogos, logoImg: logoImg, ago: function (m) { return fmt.mins(m); }, RM: RM, el: el, esc: esc, fmt: fmt, tpl: tpl, isAddr: isAddr };
 })();

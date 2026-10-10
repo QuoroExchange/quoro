@@ -432,8 +432,7 @@ h1,h2,.chead h1,.bh h2,.cfinal h2{text-wrap:balance}
 /* ===== phones: the token, its score, Quoro AI and flags come before the form ===== */
 @media (max-width:767px){
   .swapc .appgrid{display:flex;flex-direction:column}
-  .swapc .tpanel{order:-1;border-radius:26px 26px 0 0;border-bottom:1px solid var(--line2)}
-  .swapc .swap{border-bottom:0}
+  .swapc .tpanel{order:1;border-radius:0 0 26px 26px;border-top:1px solid var(--line2)}
   .swapc.has-token .warns{min-height:0}
   .swapc .tpanel:has(.st-empty:not([hidden])){display:none}
 }
@@ -457,7 +456,27 @@ h1,h2,.chead h1,.bh h2,.cfinal h2{text-wrap:balance}
 /* explore: 50 rows at a time */
 .xmore{display:flex;margin:20px auto 0;height:44px;padding:0 24px}
 /* phones: an address typed or pasted into the form opens its card under the form, so the field never moves */
-@media (max-width:767px){.swapc.anchored .tpanel{order:1;border-radius:0 0 26px 26px;border-top:1px solid var(--line2);border-bottom:0}}
 /* the receive field keeps one height with or without a token, so the button under it never moves */
 .swapc:not(.selling) .f-get{min-height:149px}
 @media (max-width:520px){.swapc:not(.selling) .f-get{min-height:132px}}
+
+/* phones: the form comes first, the token card right under it, on every way in (link, search, examples, paste).
+   Quote details live in Review on phones; one warning keeps its room, so the card under the form does not move. */
+@media (max-width:767px){
+  .swapc #rrows,.swapc.noquote #rrows{display:none!important}
+  .swapc.has-token .warns,.swapc.has-token:not(.selling) .warns{display:grid!important;min-height:72px!important}
+  .swapc:not(.selling) #paneSwap>.warns,.swapc.selling #paneSwap>.warns{order:8}
+}
+/* amounts: one line height whatever the font size, so shrinking never moves the field */
+.fr.mt{height:56px}
+.amt{white-space:nowrap}
+@media (max-width:520px){.fr.mt{height:48px}}
+/* sale finished: the result alone, no repeated amount, title or approve note */
+#review.sold .revpair,#review.sold #vRows,#review.sold .requote{display:none}
+#review.sold #revTitle{visibility:hidden}
+/* 404 glow stays inside the page; footer block line on one line from 768 */
+.nfmain{overflow:hidden}.nfmain .glow{max-width:100%}
+.fchain{white-space:nowrap}
+@media (max-width:420px){.fchain{white-space:normal}}
+@media (max-width:767px){#swapMount[data-layout="app"]{min-height:calc(100svh - 64px)}}
+@media (max-width:1100px){.swapc:not(.selling) #paneSwap>.warns,.swapc.selling #paneSwap>.warns{order:8}}

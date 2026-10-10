@@ -58,7 +58,7 @@
     $('sScore').textContent = sc.value;
     document.querySelectorAll('#sDial path').forEach(function (p, i) { p.setAttribute('class', i === 0 ? 'tail' : i < sc.value ? 'on' : ''); });
     $('sLaunch').textContent = sc.hygiene != null ? sc.hygiene : '—'; $('sMarket').textContent = sc.market != null ? sc.market : '—';
-    $('sTok').innerHTML = logo(t.logo, t.symbol, 'tkin big') + U.esc(t.name) + ' · ' + U.esc(t.symbol);
+    $('sTok').innerHTML = logo(t.logo, t.symbol, 'tkin big') + U.esc(U.nameTick(t.name, t.symbol));
     U.fillLogos($('sTok'));
     var lbl = function () { $('sLabel').textContent = U.tpl('Caught by Quoro · {time}', { time: since(scoreT0) }); $('sLabel').setAttribute('data-slot', 'score.example.label'); };
     lbl(); setInterval(lbl, 30000);

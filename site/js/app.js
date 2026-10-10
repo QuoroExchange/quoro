@@ -134,18 +134,18 @@
   function resetToken() { clearTimeout(st.qTimer); st.qSeq++; mount.classList.remove('has-token'); st.token = null; st.quote = null; clearTimeout(st.expTimer); paintReceive(); paintQuote(); paintButton(); }
   /* header search picks a token: fill the form in place, no page load */
   window.QuoroPick = function (ca, o) {
-    mount.classList.remove('anchored'); $('caInput').value = ca; picking(true); check(ca);
+    $('caInput').value = ca; picking(true); check(ca);
     if (o && o.live) return;   /* landing opens on a just-checked launch: no scroll */
     var r = mount.getBoundingClientRect(); if (r.top < 64 || r.top > window.innerHeight * 0.5) window.scrollTo({ top: window.scrollY + r.top - 88, behavior: U.RM ? 'auto' : 'smooth' });
   };
-  $('caForm').addEventListener('submit', function (e) { e.preventDefault(); mount.classList.add('anchored'); check($('caInput').value); });
-  $('caInput').addEventListener('paste', function () { setTimeout(function () { var v = $('caInput').value.trim(); if (U.isAddr(v)) { mount.classList.add('anchored'); check(v); } }, 0); });
+  $('caForm').addEventListener('submit', function (e) { e.preventDefault(); check($('caInput').value); });
+  $('caInput').addEventListener('paste', function () { setTimeout(function () { var v = $('caInput').value.trim(); if (U.isAddr(v)) check(v); }, 0); });
 
   function renderToken(t) {
     show('token'); mount.classList.add('has-token');
     try { document.dispatchEvent(new CustomEvent('quoro:token', { detail: t })); } catch (e) {}
     var ico = $('tIco'); ico.className = 'tk' + (t.logo ? ' img' : '') + (t.kind === 'stock' ? ' dk' : ''); ico.innerHTML = t.logo ? '<img src="' + U.esc(t.logo) + '" alt="" width="24" height="24">' : U.esc(t.symbol.slice(0, 4));
-    $('tName').textContent = t.name + ' · ' + t.symbol;
+    $('tName').textContent = U.nameTick(t.name, t.symbol);
     $('tTag').textContent = S['app.card.tag.' + t.kind] || '';
     $('tTime').textContent = new Date().toTimeString().slice(0, 5);
     $('launchBlock').hidden = t.kind !== 'launch'; $('stockBlock').hidden = t.kind !== 'stock'; $('otherBlock').hidden = t.kind !== 'other';
@@ -265,7 +265,7 @@
   document.querySelectorAll('#tpcts [data-tpct]').forEach(function (b) {
     b.addEventListener('click', function () {
       if (!(st.hold > 0)) return; var p = +b.getAttribute('data-tpct');
-      $('sellAmt').value = p === 100 ? st.holdStr : share(p); requote(0);
+      $('sellAmt').value = p === 100 ? st.holdStr : share(p); fitAmt($('sellAmt')); requote(0);
     });
   });
   /* a share of the balance in exact units (BigInt from raw), never scientific notation */
@@ -365,6 +365,22 @@
       }).catch(function (e) { if (seq !== st.qSeq) return; st.quote = null; st.quoting = false; st.qErr = e; paintQuote(); paintButton(); });
     }, delay);
   }
+  /* long amounts shrink to fit next to the token pill; the field's value is never changed */
+  function fitAmt(el) {
+    if (!el) return;
+    el.style.fontSize = '';
+    var txt = el.value != null && el.tagName === 'INPUT' ? el.value : el.textContent, w = el.clientWidth;
+    if (!txt || !w) return;
+    var cs = getComputedStyle(el), base = parseFloat(cs.fontSize);
+    fitAmt.c = fitAmt.c || document.createElement('canvas').getContext('2d');
+    fitAmt.c.font = cs.fontWeight + ' ' + base + 'px ' + cs.fontFamily;
+    var need = fitAmt.c.measureText(txt).width + 4;
+    if (need > w) el.style.fontSize = Math.max(14, Math.floor(base * w / need)) + 'px';
+  }
+  function fitAll() { ['amount', 'sellAmt', 'outAmt', 'recvAmt'].forEach(function (id) { fitAmt($(id)); }); }
+  ['amount', 'sellAmt'].forEach(function (id) { $(id).addEventListener('input', function () { fitAmt(this); }); });
+  if (window.MutationObserver) ['outAmt', 'recvAmt'].forEach(function (id) { new MutationObserver(function () { fitAmt($(id)); }).observe($(id), { childList: true, characterData: true, subtree: true }); });
+  window.addEventListener('resize', fitAll);
   function amtEl() { return st.side === 'sell' ? $('sellAmt') : $('amount'); }
   function sellRoute(q) {
     var to = (q && q.route && q.route.to) || st.to, two = q && ((q.route && q.route.signatures === 2) || (q.steps && q.steps[0] && q.steps[0].kind === 'approve'));
@@ -495,7 +511,7 @@
   function openReview() {
     var q = st.quote; if (!q) return;
     clearTimeout(st.qTimer); clearTimeout(st.expTimer); st.qSeq++;
-    st.review = q; st.ended = false; st.costOk = false; paintReview(q); $('review').classList.remove('ended');
+    st.review = q; st.ended = false; st.costOk = false; $('review').classList.remove('sold'); paintReview(q); $('review').classList.remove('ended');
     $('vRequote').hidden = true; $('phase').innerHTML = ''; confirmButton();
     $('review').hidden = false; document.body.classList.add('modal-open'); lockPage(true); $('confirmBtn').focus();
   }
@@ -552,6 +568,7 @@
     if (W.refresh) W.refresh();
   }
   function doneSell(s) {
+    $('review').classList.add('sold');   /* the result says the amount; the review above it and its note are done */
     var q = st.review, t = st.token, has = s.received != null, amt = has ? F.num(s.received) : '', coinS = (q && q.outSymbol) || ch(st.to).native;
     st.busy = false; st.ended = true; $('revClose').disabled = false; /* nothing above the result moves; the result scrolls into view */
     $('phase').innerHTML = '<div class="done"><span class="ok">✓</span>' + (has ? '<b class="dn-amt" data-slot="app.sell.done">' + cIco((q && q.route && q.route.to) || st.to, 'big') + U.esc(T('app.sell.done', { amount: amt, coin: coinS })) + '</b><p>' + U.esc(CHAIN[(q && q.route && q.route.to) || st.to] || '') + '</p>' : '<p data-slot="app.sell.done.noamount">' + U.esc(S['app.sell.done.noamount']) + '</p>') +
