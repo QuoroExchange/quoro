@@ -42,7 +42,7 @@
   <div class="dtoc" id="dtoc">
     <button class="dsum" type="button" id="dsum" aria-expanded="false" aria-controls="dtocNav"><span data-slot="docs.toc">On this page</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <b data-slot="docs.toc">On this page</b>
-    <nav id="dtocNav" aria-label="On this page"><a href="#about" data-slot="docs.about.title">What Quoro is</a><a href="#score" data-slot="docs.score.title">Data score</a><a href="#buying" data-slot="docs.buy.title">How buying works</a><a href="#selling" data-slot="docs.sell.title">Selling</a><a href="#fees" data-slot="docs.fees.title">Fees</a><a href="#chain" data-slot="docs.chain.title">Robinhood Chain</a><a href="#wallet" data-slot="docs.wallet.title">Wallets</a><a href="#disclaimers" data-slot="docs.legal.title">Disclaimers</a></nav>
+    <nav id="dtocNav" aria-label="On this page"><a href="#about" data-slot="docs.about.title">What Quoro is</a><a href="#score" data-slot="docs.score.title">Data score</a><a href="#buying" data-slot="docs.buy.title">How buying works</a><a href="#selling" data-slot="docs.sell.title">Selling</a><a href="#fees" data-slot="docs.fees.title">Fees</a><a href="#chain" data-slot="docs.chain.title">Robinhood Chain</a><a href="#wallet" data-slot="docs.wallet.title">Wallets</a><a href="#api" data-slot="docs.api.title">API</a><a href="#disclaimers" data-slot="docs.legal.title">Disclaimers</a></nav>
   </div>
   <article class="dmain">
     <h1 data-slot="docs.title">Docs</h1>
@@ -113,6 +113,18 @@
     <section class="dsec" id="wallet">
       <h2 data-slot="docs.wallet.title">Wallets</h2>
       <p data-slot="docs.wallet.p1">Checking a token needs no wallet. You connect one only to buy or sell.</p><p data-slot="docs.wallet.p2">Connect the wallet you already use. Quoro doesn’t create wallets and never holds your money: you sign every transaction, and tokens arrive in your own wallet.</p><p data-slot="docs.wallet.p3">New tokens often don’t show in a wallet until you add them. After a buy, Quoro offers a button to add the token.</p>
+    </section>
+
+    <section class="dsec" id="api">
+      <h2 data-slot="docs.api.title">API</h2>
+      <p data-slot="docs.api.p1">The reads behind this site are open. No key, no sign up, and any site may call them from the browser.</p>
+      <ul>
+        <li><code>GET /api/token/{address}</code> <span data-slot="docs.api.token">a Robinhood Chain token: facts, its Data score and the flags behind it. 60 requests a minute.</span></li>
+        <li><code>GET /api/launches?sort=trending|recent|all&amp;limit=50</code> <span data-slot="docs.api.launches">scored launches, newest or most traded first.</span></li>
+        <li><code>GET /api/pulse</code> <span data-slot="docs.api.pulse">chain numbers: block, new tokens in 24 hours, how many launches are red-flagged.</span></li>
+        <li><code>GET /api/stocks</code> <span data-slot="docs.api.stocks">the 64 stock tokens of Robinhood Chain and their prices.</span></li>
+      </ul>
+      <p data-slot="docs.api.p2">Answers are JSON and may be a few seconds old. A score is a reading of public on-chain data, not advice, so show it as the Data score from Quoro. The code that produces it is <a href="https://github.com/QuoroExchange/quoro" target="_blank" rel="noopener">in the repository</a>.</p>
     </section>
 
     <p class="dfollow"><a href="https://x.com/quoroexchange" target="_blank" rel="noopener"><svg class="xmark" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77zm-1.08 16.18h1.7L7.4 4.73H5.58z"/></svg><span data-slot="docs.follow">Updates and new features: @quoroexchange on X.</span></a></p>

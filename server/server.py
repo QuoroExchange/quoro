@@ -1056,6 +1056,9 @@ def search(qtext: str) -> list:
     return hits[:8]
 
 
+PUBLIC_API = {"/api/pulse", "/api/launches", "/api/stocks"}   # read-only, documented, callable from any site; everything else stays same-origin
+
+
 # ---- per-visitor limits ----------------------------------------------------------------------------------------------------
 _HITS: dict = {}
 
@@ -1212,6 +1215,7 @@ class H(BaseHTTPRequestHandler):
 
     def headers_common(self) -> None:
         self.send_header("x-content-type-options", "nosniff"); self.send_header("referrer-policy", "strict-origin-when-cross-origin")
+        if getattr(self, "pub", False): self.send_header("access-control-allow-origin", "*")   # the read-only endpoints anyone may call (see PUBLIC_API)
 
     def send(self, code: int, body: bytes, ctype: str, cache: str = "no-store", gz_key: str | None = None) -> None:
         self.send_response(code); self.send_header("content-type", ctype); self.send_header("cache-control", cache); self.headers_common()
@@ -1271,6 +1275,7 @@ class H(BaseHTTPRequestHandler):
 
     def do_GET(self):
         u = urllib.parse.urlparse(self.path); path = u.path; qs = {k: v[0] for k, v in urllib.parse.parse_qs(u.query).items()}
+        self.pub = path in PUBLIC_API or path.startswith("/api/token/")
         try:
             if path == "/api/config":
                 return self.json({"privy": PRIVY_APP_ID or None, "privyV": asset_version("/js/privy.js"),

@@ -175,12 +175,13 @@ a.xr:hover{background:var(--s1)}
 .dsec h2{font:500 44px/1.08 var(--sans);letter-spacing:-.035em;margin-bottom:20px}
 .dsec h3{font:500 26px/1.2 var(--sans);letter-spacing:-.02em;margin:40px 0 14px}
 .dsec p{font-size:19px;line-height:1.6;color:var(--t1);max-width:760px}
-.dsec p+p{margin-top:14px}.dnote{color:var(--t2);font-size:16px}
+.dsec p+p{margin-top:14px}.dsec ul+p{margin-top:16px}.dnote{color:var(--t2);font-size:16px}
 .dsec ul{margin:14px 0 0 0;padding:0;list-style:none;display:grid;gap:10px;max-width:760px}
 .dsec li{position:relative;padding-left:22px;font-size:18px;line-height:1.55}
 .dsec li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--lime)}
 .dsec a{color:var(--lime);text-decoration:none}.dsec a:hover{text-decoration:underline}
 .dsec code,.formula-big{font-family:var(--mono)}
+.dsec li>code{display:block;font-size:15px;color:var(--lime);margin-bottom:2px;word-break:break-word}
 /* weight tiles + scale */
 .dtiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
 .dtile{border-radius:24px;padding:28px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between}
