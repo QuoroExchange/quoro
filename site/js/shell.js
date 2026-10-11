@@ -119,6 +119,71 @@
     document.addEventListener('click', function (e) { if (!form.contains(e.target)) close(); });
   }
 
+  /* ---------- our token: shown only once /api/config gives token.ca and token.ticker; nothing is in the HTML before that ---------- */
+  (function () {
+    if (!API || !API.config) return;
+    var TS = { 'token.pill': '{tk}', 'token.copy': 'Copy address', 'token.copied': 'Copied', 'token.eyebrow': '{tk}', 'token.title': 'The token of Quoro.',
+      'token.ca.label': 'Contract', 'token.only': 'This is the only contract.', 'token.buy': 'Buy {tk}', 'token.explorer': 'View on explorer',
+      'footer.token': '{tk} · {short_ca}', 'docs.token.title': 'The {tk} token',
+      'docs.token.p': '{tk} is the token of Quoro. Its contract on Robinhood Chain is {ca}. This is the only contract, and you can check it in Quoro itself by pasting the address.' };
+    var MARK = '<img class="qmark" src="/assets/brand/mark.svg" alt="" width="20" height="20">';
+    var COPY = '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    function toast() {
+      var t = document.getElementById('qtoast');
+      if (!t) { t = document.createElement('div'); t.id = 'qtoast'; t.className = 'qtoast'; t.setAttribute('role', 'status'); t.setAttribute('data-slot', 'token.copied'); document.body.appendChild(t); }
+      t.textContent = TS['token.copied']; t.classList.add('on'); clearTimeout(toast.k); toast.k = setTimeout(function () { t.classList.remove('on'); }, 1600);
+    }
+    function copy(ca) {
+      var fallback = function () {   /* older browsers or no clipboard permission */
+        var ta = document.createElement('textarea'); ta.value = ca; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+        document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); if (ok) toast();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ca).then(toast).catch(fallback); else fallback();
+    }
+    function wire(root, ca) { root.querySelectorAll('[data-copy-ca]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); copy(ca); }); }); }
+    API.config().then(function (c) {
+      var tk = c && c.token; if (!tk || !tk.ca || !tk.ticker || !U.isAddr(tk.ca)) return;
+      var TK = '$' + String(tk.ticker).replace(/^\$/, ''); Object.keys(TS).forEach(function (k) { TS[k] = TS[k].split('{tk}').join(TK); });   /* the ticker comes from the server, never from this file */
+      var ca = tk.ca, sh = F.short(ca), rh = ((c.chains || []).filter(function (x) { return x.key === 'rh'; })[0] || {}).explorer;
+      var copyBtn = function (cls) { return '<button type="button" class="' + cls + '" data-copy-ca aria-label="' + esc(TS['token.copy']) + '" title="' + esc(TS['token.copy']) + '" data-slot-aria="token.copy">'; };
+      /* 1. header pill (desktop) and the same pill in the phone menu */
+      var navr = document.querySelector('.topnav .navr');
+      if (navr) {
+        var pill = document.createElement('div'); pill.className = 'qpill'; pill.id = 'qPill';
+        pill.innerHTML = copyBtn('qpillb') + MARK + '<b data-slot="token.pill">' + esc(TS['token.pill']) + '</b><span class="mono" data-slot="token.pill.ca">' + esc(sh) + '</span>' + COPY + '</button>';
+        navr.insertBefore(pill, navr.firstChild); wire(pill, ca);
+      }
+      var ms = document.getElementById('mSheet');
+      if (ms) { var mp = document.createElement('div'); mp.className = 'qpill qpill-m'; mp.innerHTML = copyBtn('qpillb') + MARK + '<b data-slot="token.pill">' + esc(TS['token.pill']) + '</b><span class="mono" data-slot="token.pill.ca">' + esc(sh) + '</span>' + COPY + '</button>'; ms.appendChild(mp); wire(mp, ca); }
+      /* 2. landing block under the first screen */
+      var hero = document.querySelector('.chero');
+      if (hero) {
+        var sec = document.createElement('section'); sec.className = 'cs qtoken'; sec.id = 'token'; sec.setAttribute('aria-label', TS['token.eyebrow']);
+        sec.innerHTML = '<div class="wrap"><div class="qtcard">' +
+          '<div class="qth"><span class="ey">' + MARK + '<span data-slot="token.eyebrow">' + esc(TS['token.eyebrow']) + '</span></span><h2 data-slot="token.title">' + esc(TS['token.title']) + '</h2></div>' +
+          '<div class="qtca"><span class="lab" data-slot="token.ca.label">' + esc(TS['token.ca.label']) + '</span>' + copyBtn('qtcopy') + '<span class="mono" data-slot="token.ca">' + esc(ca) + '</span>' + COPY + '</button><span class="qtonly" data-slot="token.only">' + esc(TS['token.only']) + '</span></div>' +
+          '<div class="qtacts"><a class="btn btn-lime" href="/app?ca=' + esc(ca) + MOCK + '" data-slot="token.buy">' + esc(TS['token.buy']) + '</a>' +
+          (rh ? '<a class="btn btn-ghost" href="' + esc(rh.replace(/\/$/, '') + '/token/' + ca) + '" target="_blank" rel="noopener" data-slot="token.explorer">' + esc(TS['token.explorer']) + '</a>' : '') + '</div></div></div>';
+        hero.parentNode.insertBefore(sec, hero.nextSibling); wire(sec, ca);
+      }
+      /* 3. footer, every page */
+      document.querySelectorAll('footer .fchain').forEach(function (fc) {
+        var p = document.createElement('p'); p.className = 'ftoken';
+        p.innerHTML = copyBtn('ftokenb') + MARK + '<span data-slot="footer.token">' + esc(U.tpl(TS['footer.token'], { short_ca: sh })) + '</span>' + COPY + '</button>';
+        fc.parentNode.insertBefore(p, fc.nextSibling); wire(p, ca);
+      });
+      /* 4. docs: a section before the disclaimers */
+      var dis = document.getElementById('disclaimers');
+      if (dis && document.querySelector('.dwrap')) {
+        var ds = document.createElement('section'); ds.className = 'dsec'; ds.id = 'token';
+        ds.innerHTML = '<h2 data-slot="docs.token.title">' + esc(TS['docs.token.title']) + '</h2><p data-slot="docs.token.p">' + esc(U.tpl(TS['docs.token.p'], { ca: ca })).replace(esc(ca), '<span class="mono qca">' + esc(ca) + '</span>') + '</p>';
+        dis.parentNode.insertBefore(ds, dis);
+        var toc = document.querySelector('#dtocNav a[href="#disclaimers"]');
+        if (toc) { var a = document.createElement('a'); a.href = '#token'; a.setAttribute('data-slot', 'docs.token.title'); a.textContent = TS['docs.token.title']; toc.parentNode.insertBefore(a, toc); }
+      }
+    }).catch(function () {});
+  })();
+
   /* ---------- wallet pill + panel ---------- */
   var signBtn = document.getElementById('navSignIn'), acct = document.getElementById('navAcct');
   if (!signBtn || !acct || !W) return;
