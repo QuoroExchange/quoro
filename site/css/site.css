@@ -329,8 +329,8 @@ a.xr:hover{background:var(--s1)}
 .smsg{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 12px;font-size:14px;color:var(--t2)}
 .smsg{flex-direction:row;align-items:center;flex-wrap:wrap;gap:8px}
 .smsg b{color:var(--t1);font-weight:500;width:100%}
-.spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--s3);border-top-color:var(--lime)}
-@media (prefers-reduced-motion:no-preference){.spin{animation:rot .8s linear infinite}}
+.smsg .spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--s3);border-top-color:var(--lime)}
+@media (prefers-reduced-motion:no-preference){.smsg .spin{animation:rot .8s linear infinite}}
 @keyframes rot{to{transform:rotate(360deg)}}
 .scard{padding:10px;display:grid;gap:12px}
 .sch{display:flex;align-items:center;gap:12px}
