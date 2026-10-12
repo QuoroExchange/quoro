@@ -56,6 +56,35 @@ Every route is one transaction for a buy; a sale is an approval plus the sale. F
 bridge fee, the route provider's fee (LI.FI takes 0.25% on its routes), the token's creator tax and the price impact.
 Quoro itself takes no fee.
 
+## Public API
+
+The reads behind the site are open: no key, no sign-up, and any site may call them from the browser (they answer
+with `access-control-allow-origin: *`).
+
+| endpoint | what it returns |
+|---|---|
+| `GET /api/token/{address}` | a Robinhood Chain token: facts, its Data score and the flags behind it (60 requests a minute) |
+| `GET /api/launches?sort=trending\|recent\|all&limit=50` | scored launches, newest or most traded first |
+| `GET /api/pulse` | chain numbers: block, new tokens in 24 hours, how many tracked launches are red-flagged |
+| `GET /api/stocks` | the 64 stock tokens of Robinhood Chain and their prices |
+
+Everything else (quotes, wallets, portfolio) answers only the site itself. Docs: [quoro.exchange/docs#api](https://quoro.exchange/docs#api).
+
+## @QuoroAI, the reply account
+
+[@QuoroAI](https://x.com/QuoroAI) answers on X. Tag it with a Robinhood Chain token address, or reply to one of its
+posts with one, and it replies with that token's Data score and up to three flags, read from `GET /api/token`.
+
+- It answers only when asked: the handle typed in the person's own words, or a direct reply to its post. X adds the
+  thread's handles to every reply, and those alone are not a request.
+- No address, no reply. If the address is not in the mention it looks in the post being answered, and buys a full
+  copy of that post when X sends it truncated.
+- One reply per mention, marked before it is sent, so a crash can lose an answer but never send a second one.
+  "stop" opts a person out for good.
+- The reply text is built from rules, not written by a model, and carries one cashtag and no link.
+
+Code: `bot/` (`worker.py` the loop, `render.py` the reply text, `xapi.py` the X API calls, standard library only).
+
 ## Run it
 
 ```bash
@@ -83,6 +112,7 @@ server/server.py     API, score, quotes, the site
 server/stocks.json   the 64 stock tokens of Robinhood Chain and their pools
 site/                pages, styles, scripts, assets
 privy/               source of the wallet-connection bundle
+bot/                 the @QuoroAI reply account
 Dockerfile           production image
 ```
 

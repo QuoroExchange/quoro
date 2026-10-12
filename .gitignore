@@ -11,3 +11,5 @@ privy/node_modules
 __pycache__/
 *.pyc
 .DS_Store
+# the reply bot keeps its state locally
+bot-state.json
